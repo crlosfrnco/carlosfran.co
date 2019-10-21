@@ -8,69 +8,78 @@
 <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Chivo:300i,400|Source+Code+Pro:300,400&display=swap" rel="stylesheet">
 <style>
 
-body, html{
+body, html {
     background: #9fd3bc;
     position: relative;
-    height: 100%;
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
 
-.header{
-    background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostampweb-2.jpg") no-repeat center fixed;
+.header {
+    background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostampweb-2.jpg") no-repeat fixed 50% 14%;
+    background-size: 50.7%;
+    width: auto;    
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostampweb-2.jpg") no-repeat fixed center bottom;
     background-size: contain;
     width: auto;
-    height: 100%;
+    height: 120%;
     margin: 0;
     padding: 0;
 }
 
-.menu{
-    position: fixed;
+.menu {
+    position: sticky;
     top: 0;
     width: 100%;
-    height: 0%;
+    height: auto;
     margin: 0;
     padding: 0;
 }
 
 ul {
+  background-color: #7ecab2;
   list-style-type: none;
   margin: 0;
   padding: 0;
+  padding-left: 9px;
   overflow: hidden;
 }
 
 li {
-  float: right;
+  float: left;
 }
 
 li a {
   display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  padding: 18px;
+  padding: 12px;
 }
 
 li a:hover {
-  color: #2a312f;
+  color: #FDFDFD;
   background-color: #7ecab2;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: auto;
-  grid-gap: 0.5%;
+  grid-gap: 0;
   margin: 0;
-  margin-bottom: 12%;                                                                                                 
   padding: 0;
 }
 
 .grid-container > div {
   text-align: center;
+  margin: 0;
   padding: 0;
-  margin-top: 10%;
+  padding-bottom: 20%;
 }
 
 .item1 {
@@ -97,7 +106,7 @@ a:hover {
 h1 {
   color: #0e1612;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: lighter;
 }
 
