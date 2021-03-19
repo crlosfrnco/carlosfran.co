@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1", minimum-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1", minimum-scale=1, maximum-scale=1>
 <title>carlosfran.co</title>
 <link rel="shortcut icon" type="image/png" sizes="64x64" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_fav_64px.png"/>
 <link rel="apple-touch-icon" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_app-1.png">
@@ -13,8 +13,7 @@
 <link href="https://necolas.github.io/normalize.css/latest/normalize.css">
 <style>
 
-body,
-html {
+body, html {
   background: #9fd3bc;
   width: 100%;
   height: 100%;
@@ -22,14 +21,14 @@ html {
   padding: 0;
 }
 
-/* Non-responsive menu (horizontal list) */
+/* non-responsive menu (horizontal list) */
 ul {
   background-color: none;
   list-style-type: none;
   position: sticky;
   top: 0;
   overflow: hidden;
-  /* Padding for .menu content */
+  /* padding for .menu content */
   padding: 1%;
   margin: 0;
 }
@@ -38,7 +37,7 @@ li {
   float: left;
 }
 
-/* List item [link] */
+/* list item title [link] */
 li a {
   font-family: 'Archivo Black', sans-serif;
   font-size: 60%;
@@ -57,12 +56,12 @@ li a:hover {
   color: #FDFDFD;
 }
 
-/* For mobile "hero" */
+/* for mobile "hero" */
 ul img {
   width: 0;
 }
 
-/* Fixed logo hero image for desktop screens */
+/* fixed logo hero image for desktop screens */
 .hero {
   background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;
   background-size: 50%;
@@ -72,13 +71,13 @@ ul img {
   padding: 0;
 }
 
-/* To hide mobile hero */
+/* hide mobile hero */
 .herom {
   background: none;
 }
 
 .footer {
-  background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfran-costampheader.png") no-repeat fixed center bottom;
+  background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed center bottom;
   background-size: contain;
   width: 100%;
   height: 100%;
@@ -86,7 +85,7 @@ ul img {
   padding: 0;
 }
 
-/* Portfolio content (column) */
+/* content (column) */
 .grid-container {
   display: grid;
   grid-template-columns: auto;
@@ -95,6 +94,7 @@ ul img {
   padding: 0;
 }
 
+/* content title */
 .grid-container>div {
   font-size: 60%;
   text-align: center;
@@ -107,8 +107,7 @@ ul img {
   grid-column: 1 / span 1;
 }
 
-.grid-container a:link,
-a:visited {
+.grid-container a:link, a:visited {
   background-color: transparent;
   color: #0e1612;
 }
@@ -121,10 +120,10 @@ a:visited {
 .grid-container img {
   box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.05), 0 2px 45px 0 rgba(0, 0, 0, 0.1);
   width: 50%;
-  height: 50%;
+  height: auto%;
 }
 
-/* For titular grid content */
+/* for titular grid content */
 h2 {
   font-family: 'Source Code Pro', monospace;
   font-weight: lighter;
@@ -134,7 +133,7 @@ h2 {
 
 /*------------------------------------------------------------------------------------------------------------*/
 
-/* Responsive header + menu */
+/* responsive header + menu */
 @media screen and (max-width: 1334px) {
 
   body,
@@ -152,7 +151,7 @@ h2 {
     height: 100%;
     padding: 0;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: auto;
   }
 
   li {
@@ -176,7 +175,7 @@ h2 {
     width: 100%;
   }
 
-/* Override hero image */
+/* override hero image */
   .hero {
     background: none;
   }
@@ -196,10 +195,19 @@ h2 {
     background: #9fd3bc;
     display: grid;
     grid-template-columns: auto;
-    grid-gap: 5%;
+    grid-gap: 2;
     margin: 0;
     padding: 0;
-    padding-bottom: 25%;
+    padding-bottom: 0;
+  }
+  
+  /* content title */
+  .grid-container>div {
+    font-size: 75%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5%;
   }
 
   .grid-container img {
@@ -250,7 +258,7 @@ h2 {
 <div class="grid-container">
   
   <div class="item">
-    <img src="https://www.solidbackgrounds.com/images/1400x1050/1400x1050-peach-orange-solid-color-background.jpg">
+    <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg">
     <h2>
       <a href="https://www.dropbox.com/home?preview=Reimagining+Whataburger.pdf">
         Reimagining Whataburger
@@ -258,7 +266,7 @@ h2 {
     </h2>
   </div>
   <div class="item">
-    <img src="https://www.beautycolorcode.com/f3f3f3-2880x1800.png">
+    <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/words-hero.png">
     <h2>
       <a href="https://www.behance.net/gallery/99210187/Words">
         Words
@@ -319,4 +327,5 @@ h2 {
   <div class="footer"></div>
 </div>
 
+</body>
 </html>
