@@ -6,11 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" , minimum-scale=1, maximum-scale=1>
     <title>carlosfran.co</title>
-    <link rel="shortcut icon" type="image/png" sizes="64x64" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_fav_64px.png" />
+    <link rel="shortcut icon" type="image/png" sizes="64x64" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_fav_64px.png">
     <link rel="apple-touch-icon" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_app-1.png">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Chivo:300i,400|Source+Code+Pro:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/day0fal.css">
-    <link href="https://necolas.github.io/normalize.css/latest/normalize.css">
     <style>
       body,
       html {
@@ -20,24 +18,24 @@
         margin: 0;
         padding: 0;
       }
-
-      /* non-responsive menu (horizontal list) */
+     
+/* unordered list -- horizontal navbar */
       ul {
         background-color: none;
         list-style-type: none;
         position: sticky;
         top: 0;
         overflow: hidden;
-        /* padding for .menu content */
-        padding: 1%;
+        padding: 1%;  /* so list items don't collide or overlap */
         margin: 0;
       }
 
+/* list item element -- list items in navbar */
       li {
-        float: left;
+        float: left;  /* so list items consecutively float left */
       }
 
-      /* list item title [link] */
+/* list item element anchor -- menu text attributes */
       li a {
         font-family: 'Archivo Black', sans-serif;
         font-size: 60%;
@@ -45,25 +43,26 @@
         line-height: normal;
         text-decoration: none;
         display: inline-block;
-        text-align: center;
+        text-align: center;  /* so text is centered within element */
         padding-left: 20px;
         padding-right: 20px;
       }
-
+      
+/* list item element anchor -- menu text 'hover' attributes */
       li a:hover {
         background-image: linear-gradient(to right, #9FD3BC, #B3DBBB);
         box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.02), 0 4px 18px 0 rgba(0, 0, 0, 0.03);
         color: #FDFDFD;
       }
 
-      /* for mobile "hero" */
+/* unordered list -- for mobile header (???) */
       ul img {
         width: 0;
       }
 
-      /* fixed logo hero image for desktop screens */
+/* fixed hero img for device-width > 1334px */
       .hero {
-        background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;
+        background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;  /* hero img fixed at center of device screen */
         background-size: 50%;
         width: 100%;
         height: 100%;
@@ -71,22 +70,22 @@
         padding: 0;
       }
 
-      /* hide mobile hero */
+/* hide mobile hero (???) */
       .herom {
         background: none;
       }
 
       .footer {
         background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed center bottom;
-        background-size: contain;
+        background-size: contain;  /* so img scales to fit device 'container' without stretching */
         width: 100%;
         height: 100%;
         margin: 0;
         padding: 0;
       }
 
-      /* content (column) */
-      .grid-container {
+/* grid container -- main content */
+      .content-grid {
         display: grid;
         grid-template-columns: auto;
         grid-gap: 0;
@@ -94,8 +93,8 @@
         padding: 0;
       }
 
-      /* content title */
-      .grid-container>div {
+/* division for grid item titles */
+      .content-grid>div {
         font-size: 60%;
         text-align: center;
         margin: 0;
@@ -103,28 +102,31 @@
         padding-bottom: 25%;
       }
 
+/* single grid unit */
       .item {
         grid-column: 1 / span 1;
       }
 
-      .grid-container a:link,
-      a:visited {
+/* grid anchor -- title text 'link' and 'visisted' attributes */
+      .content-grid a:link, a:visited {
         background-color: transparent;
         color: #0e1612;
       }
 
-      .grid-container a:hover {
+/* grid anchor -- title text 'hover' attributes */
+      .content-grid a:hover {
         background-color: #9FD3BC;
         color: #FDFDFD;
       }
 
-      .grid-container img {
+/* grid image -- content 'hero' img attributes */
+      .content-grid img {
         box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.05), 0 2px 45px 0 rgba(0, 0, 0, 0.1);
         width: 50%;
         height: auto;
       }
 
-      /* for titular grid content */
+/* heading 2 -- class for title text defaults */
       h2 {
         font-family: 'Source Code Pro', monospace;
         font-weight: lighter;
@@ -132,7 +134,7 @@
         text-decoration: underline;
       }
 
-      /*------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------*/
 
       /* responsive header + menu */
       @media screen and (max-width: 1334px) {
@@ -180,7 +182,7 @@
         .hero {
           background: none;
         }
-        
+
         .footer {
           background: none;
         }
@@ -227,29 +229,28 @@
 
   <body>
 
-    <div class="herom">
-    </div>
+    <div class="herom"></div>
 
     <ul>
       <li>
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostampheader-e1571992934924.png">
       </li>
       <li>
-        <a href="https://www.linkedin.com/in/carlosfrancoxv/">
+        <a href="https://www.linkedin.com/in/crlosfrnco" target="_blank">
           <h1>
             LINKEDIN
           </h1>
         </a>
       </li>
       <li>
-        <a href="https://drive.google.com/open?id=1wgOs9qFPVasRqNFgIvfNoabROI3S-ivv">
+        <a href="https://drive.google.com/open?id=1wgOs9qFPVasRqNFgIvfNoabROI3S-ivv" target="_blank">
           <h1>
             RESUME
           </h1>
         </a>
       </li>
       <li>
-        <a href="https://www.behance.net/gallery/88131345/Carlos-Franco-Portfolio-2019-(v2)">
+        <a href="https://www.behance.net/gallery/88131345/Carlos-Franco-Portfolio-2019-(v2)" target="_blank">
           <h1>
             PORTFOLIO
           </h1>
@@ -260,7 +261,7 @@
     <div class="hero">
     </div>
 
-    <div class="grid-container">
+    <div class="content-grid">
 
       <div class="item">
         <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg">
