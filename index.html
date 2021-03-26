@@ -3,12 +3,14 @@
 <html lang="en">
 
   <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" , minimum-scale=1, maximum-scale=1>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>carlosfran.co</title>
     <link rel="shortcut icon" type="image/png" sizes="64x64" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_fav_64px.png">
     <link rel="apple-touch-icon" href="https://carlosfrancoweb.files.wordpress.com/2019/10/cf_app-1.png">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Chivo:300i,400|Source+Code+Pro:300,400&display=swap" rel="stylesheet">
+
     <style>
       body,
       html {
@@ -18,51 +20,57 @@
         margin: 0;
         padding: 0;
       }
-     
-/* unordered list -- horizontal navbar */
+
+      /* unordered list -- horizontal navbar */
       ul {
-        background-color: none;
         list-style-type: none;
+        /* so it disappears on scroll */
         position: sticky;
+        /* so it sticks longer */
         top: 0;
         overflow: hidden;
-        padding: 1%;  /* so list items don't collide or overlap */
+        /* so list items don't collide or overlap */
+        padding: 1%;
         margin: 0;
       }
 
-/* list item element -- list items in navbar */
+      /* list item element -- list items in menu (horizontal navbar) */
       li {
-        float: left;  /* so list items consecutively float left */
+        /* so list items consecutively float left */
+        float: left;
       }
 
-/* list item element anchor -- menu text attributes */
+      /* list item element anchor -- menu text attributes */
       li a {
-        font-family: 'Archivo Black', sans-serif;
-        font-size: 60%;
-        color: #0e1612;
-        line-height: normal;
-        text-decoration: none;
         display: inline-block;
-        text-align: center;  /* so text is centered within element */
+        color: #0e1612;
+        font-size: 60%;
+        line-height: normal;
+        /* so text is centered within its element */
+        text-align: center;
+        text-decoration: none;
+        /* to establish element bounds */
         padding-left: 20px;
         padding-right: 20px;
       }
-      
-/* list item element anchor -- menu text 'hover' attributes */
+
+      /* list item element anchor -- menu text attributes when hovering */
       li a:hover {
         background-image: linear-gradient(to right, #9FD3BC, #B3DBBB);
-        box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.02), 0 4px 18px 0 rgba(0, 0, 0, 0.03);
         color: #FDFDFD;
+        box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.02), 0 4px 18px 0 rgba(0, 0, 0, 0.03);
       }
 
-/* unordered list -- for mobile header (???) */
+      /* unordered list image -- wordmark stamp for mobile */
       ul img {
-        width: 0;
+        /* so the wordmark does not appear for device-width > 1334 */
+        width: 0
       }
 
-/* fixed hero img for device-width > 1334px */
+      /* fixed hero img for device-width > 1334px */
       .hero {
-        background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;  /* hero img fixed at center of device screen */
+        /* hero img fixed at center of device screen */
+        background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;
         background-size: 50%;
         width: 100%;
         height: 100%;
@@ -70,74 +78,92 @@
         padding: 0;
       }
 
-/* hide mobile hero (???) */
+      /* hide mobile hero (???) */
       .herom {
         background: none;
       }
 
       .footer {
         background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed center bottom;
-        background-size: contain;  /* so img scales to fit device 'container' without stretching */
+        /* so img scales to fit device 'container' without stretching */
+        background-size: contain;
         width: 100%;
         height: 100%;
         margin: 0;
         padding: 0;
       }
 
-/* grid container -- main content */
+      /* grid container -- main content */
       .content-grid {
         display: grid;
-        grid-template-columns: auto;
-        grid-gap: 0;
+        grid-template-rows: auto;
+        grid-row-gap: 7.5%;
         margin: 0;
         padding: 0;
       }
 
-/* division for grid item titles */
-      .content-grid>div {
+      .content-grid div {
         font-size: 60%;
+        line-height: 225%;
         text-align: center;
-        margin: 0;
-        padding: 0;
-        padding-bottom: 25%;
+        color: #2A312F;
+        transition: .05s ease;
       }
 
-/* single grid unit */
+      /* grid image -- content 'hero' img attributes */
+      .content-grid img {
+        width: 50%;
+        height: initial;
+        box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.05), 0 2px 45px 0 rgba(0, 0, 0, 0.1);
+        transition: .05s ease;
+      }
+
+      .content-grid img:hover {
+        opacity: 0.45;
+        box-shadow: 0 15px 40px 0 #B3DBBB, 0 12px 45px 0 #B3DBBB;
+      }
+      
+      .content-grid a {
+        text-decoration: none;
+      }
+
+      /* single grid unit */
       .item {
         grid-column: 1 / span 1;
       }
 
-/* grid anchor -- title text 'link' and 'visisted' attributes */
-      .content-grid a:link, a:visited {
-        background-color: transparent;
-        color: #0e1612;
-      }
-
-/* grid anchor -- title text 'hover' attributes */
-      .content-grid a:hover {
-        background-color: #9FD3BC;
-        color: #FDFDFD;
-      }
-
-/* grid image -- content 'hero' img attributes */
-      .content-grid img {
-        box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.05), 0 2px 45px 0 rgba(0, 0, 0, 0.1);
-        width: 50%;
-        height: auto;
-      }
-
-/* heading 2 -- class for title text defaults */
-      h2 {
-        font-family: 'Source Code Pro', monospace;
-        font-weight: lighter;
-        color: #2a312f;
+      /* grid anchor -- title text 'hover' attributes */
+      .content-grid h2:hover {
         text-decoration: underline;
       }
 
-/*------------------------------------------------------------------------------------------------------------*/
+      /* grid anchor -- title text 'link' and 'visisted' attributes */
+      .content-grid h2:link,
+      :visited {
+        color: #0e1612;
+      }
 
-      /* responsive header + menu */
-      @media screen and (max-width: 1334px) {
+      /* heading 1 */
+      h1 {
+        font-family: 'Archivo Black', sans-serif;
+        font-weight: lighter;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      /* heading 2 */
+      h2 {
+        font-family: 'Source Code Pro', monospace;
+        font-weight: normal;
+        text-decoration: none;
+        text-transform: normal;
+      }
+
+      /***********************************************************
+       ***********************************************************/
+
+      /* media rule -- responsive layout for device-width < 1334 */
+      @media screen and (max-width: 133px) {
 
         body,
         html {
@@ -148,7 +174,7 @@
         }
 
         ul {
-          background-image: linear-gradient(#7ecab2, #9fd3bc);
+          background-image: linear-gradient(#9fd3bc, #7ecab2);
           position: static;
           width: 100%;
           height: 100%;
@@ -157,13 +183,15 @@
           margin-bottom: auto;
         }
 
+        /* list item element -- list items in menu (vertical navbar) */
         li {
+          /* so float property does not inherit left alignment and keeps its text position consecutively vertical */
           float: none;
         }
 
         li a {
           font-family: 'Archivo Black', sans-serif;
-          font-size: 2.3vw;
+          font-size: 2.5vw;
           line-height: 300%;
           text-decoration: none;
           display: block;
@@ -174,7 +202,6 @@
         }
 
         ul img {
-          box-shadow: none;
           width: 100%;
         }
 
@@ -188,43 +215,92 @@
         }
 
         /*
-  .herom {
-    background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;
-    background-size: 100%;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
-  }
-*/
+        .herom {
+          background: url("https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostamp4k.png") no-repeat fixed 50% 50%;
+          background-size: 100%;
+          width: 100%;
+          height: auto;
+          margin: 0;
+          padding: 0;
+        }
+        */
 
-        .grid-container {
+        .content-grid {
           background: #9fd3bc;
           display: grid;
           grid-template-columns: auto;
-          grid-gap: 2;
+          grid-gap: 0;
           margin: 0;
           padding: 0;
-          padding-bottom: 0;
         }
 
-        /* content title */
-        .grid-container>div {
-          font-size: 75%;
-          text-align: center;
-          margin: 0;
-          padding: 0;
-          padding-bottom: 5%;
+        /* grid containter division -- grid item titles */
+        .content-grid>div {
+          /* no titles on mobile */
+          font-size: 0;
+          padding-bottom: 0%;
         }
 
-        .grid-container img {
+        .content-grid img {
           box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.02), 0 2px 25px 0 rgba(0, 0, 0, 0.1);
           width: 100%;
+        }
+
+        /* grid anchor -- title text attributes when hovering */
+        .content-grid img:visited {
+          background-color: #9FD3BC;
+          color: #FDFDFD;
+        }
+
+        .image {
+          display: block;
+          width: 100%;
+          height: auto;
+          backface-visibility: hidden;
+        }
+
+        .overlay {
+          opacity: 0;
+          position: relative;
+          background-image: linear-gradient(to right, #9FD3BC, #B3DBBB);
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          transform: translate(0%, -100%);
+          -ms-transform: translate(0%, -100%);
+          transition: .2s ease;
+          text-align: center;
+        }
+
+        .item:hover .image {
+          opacity: 0.3;
+        }
+
+        .item:hover .text {
+          opacity: 1;
+        }
+
+        .text {
+          font-family: 'Archivo Black', sans-serif;
+          font-size: 2.5vw;
+          color: #FDFDFD;
+          position: absolute;
+          background: #FDFDFD;
+          top: 50%;
+          left: 50%;
+          line-height: normal;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+          transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%) -ms-transform: translate(-50%, -50%);
+          transition: .2s ease;
         }
 
       }
 
     </style>
+
   </head>
 
   <body>
@@ -232,105 +308,94 @@
     <div class="herom"></div>
 
     <ul>
+
       <li>
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/carlosfrancostampheader-e1571992934924.png">
       </li>
+
       <li>
         <a href="https://www.linkedin.com/in/crlosfrnco" target="_blank">
-          <h1>
-            LINKEDIN
-          </h1>
+          <h1>Linkedin</h1>
         </a>
       </li>
+
       <li>
         <a href="https://drive.google.com/open?id=1wgOs9qFPVasRqNFgIvfNoabROI3S-ivv" target="_blank">
-          <h1>
-            RESUME
-          </h1>
+          <h1>Resume</h1>
         </a>
       </li>
+
       <li>
         <a href="https://www.behance.net/gallery/88131345/Carlos-Franco-Portfolio-2019-(v2)" target="_blank">
-          <h1>
-            PORTFOLIO
-          </h1>
+          <h1>Portfolio</h1>
         </a>
       </li>
+
     </ul>
 
-    <div class="hero">
-    </div>
+    <div class="hero"></div>
 
     <div class="content-grid">
 
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg">
-        <h2>
-          <a href="https://www.dropbox.com/home?preview=Reimagining+Whataburger.pdf">
-            Reimagining Whataburger
-          </a>
-        </h2>
+        <a href="https://www.dropbox.com/home?preview=Reimagining+Whataburger.pdf" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg">
+          <h2>Reimagining Whataburger</h2>
+        </a>
       </div>
+
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/words-hero.png">
-        <h2>
-          <a href="https://www.behance.net/gallery/99210187/Words">
-            Words
-          </a>
-        </h2>
+        <a href="https://www.behance.net/gallery/99210187/Words" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/words-hero.png">
+          <h2>Words</h2>
+        </a>
       </div>
+
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160">
-        <h2>
-          <a href="https://www.behance.net/gallery/87599561/Bridges-and-Water-Visual-Design-and-Brand-Identity">
-            Bridges and Water
-          </a>
-        </h2>
+        <a href="https://www.behance.net/gallery/87599561/Bridges-and-Water-Visual-Design-and-Brand-Identity" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160">
+          <h2>Bridges and Water</h2>
+        </a>
       </div>
+
       <div class="item">
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/rshhero.png?w=2160">
-        <h2>
-          RSHMedia
-        </h2>
+        <h2>RSHMedia</h2>
       </div>
+
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/twg_hero.png?w=2160">
-        <h2>
-          <a href="https://vimeo.com/312413805">
-            I. The Worst Guys - <i>Childish Gambino</i> (Visualization)
-          </a>
-        </h2>
+        <a href="https://vimeo.com/312413805" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/twg_hero.png?w=2160">
+          <h2>I. The Worst Guys - <i>Childish Gambino</i> (Visualization)</h2>
+        </a>
       </div>
+
       <div class="item">
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bo_hero.png?w=2160">
-        <h2>
-          Back OFF - <i>bülow</i> (Visualization)
-        </h2>
+        <h2>Back OFF - <i>bülow</i> (Visualization)</h2>
       </div>
+
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160">
-        <h2>
-          <a href="https://vimeo.com/313332124">
-            Design Principles In Motion
-          </a>
-        </h2>
+        <a href="https://vimeo.com/313332124" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160">
+          <h2>Design Principles In Motion</h2>
+        </a>
       </div>
+      
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/ais_hero_2.png?w=2160">
-        <h2>
-          <a href="https://vimeo.com/318351269">
-            Animation In Squares
-          </a>
-        </h2>
+        <a href="https://vimeo.com/318351269" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/ais_hero_2.png?w=2160">
+          <h2>Animation In Squares</h2>
+        </a>
       </div>
+
       <div class="item">
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160">
-        <h2>
-          Donald Glover (Colored Pencil, 30 × 22)
-        </h2>
+        <h2>Donald Glover (Colored Pencil, 30 × 22)</h2>
       </div>
 
       <div class="footer"></div>
+
     </div>
 
   </body>
