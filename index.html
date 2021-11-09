@@ -58,8 +58,8 @@
       li a:hover {
         background-image: linear-gradient(to right, #96D6C1, #BCE0C4);
         color: #FDFDFD;
-        box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.02), 0 4px 18px 0 rgba(0, 0, 0, 0.03);
-				transition: all 0.1s ease .0s;
+        box-shadow: 0 8px 18px 10px rgba(0, 0, 0, 0.02);
+        transition: all 0.1s ease .0s;
       }
 
       /* unordered list image -- wordmark stamp on mobile */
@@ -106,14 +106,12 @@
         font-size: 60%;
         line-height: 250%;
         text-align: center;
-        transition: 1s ease;
       }
 
       /* grid image -- content 'hero' img attributes [img dimensions: 4897 ✕ 3265] */
       .content-grid img {
         width: 50%;
         height: initial;
-        transition: 1s ease;
       }
 
       .content-grid a {
@@ -122,11 +120,28 @@
       }
 
       .content-grid a:hover {
-      	background-color: #AD98FF;
-      	opacity: 0.5;
-        box-shadow: 0 40px 60px 0 #004B25, 25px 0px 45px 0 #004B25;
-				transition: all 0.18s ease 0s;
+        background-color: #AD98FF;
+        opacity: 0.75;
+        box-shadow: 10px 10px 60px 0px #004B25;
+        transition: all 0.2s ease 0s;
       }
+
+      /* grow */
+      .hvr-grow {
+        display: inline-block;
+        vertical-align: middle;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        transition-duration: 0.33s;
+        transition-property: transform;
+      }
+
+      .hvr-grow:hover,
+      .hvr-grow:focus,
+      .hvr-grow:active {
+        transform: scale(1.015);
+      }
+
 
       /* single grid unit */
       .item {
@@ -161,7 +176,7 @@
       /*--------------------------------------------------------------------------*/
 
       /* media rule -- responsive layout for device-width < 1334 */
-      @media screen and (max-width: 1334px) {
+      @media screen and (max-width: 133px) {
 
         body,
         html {
@@ -241,7 +256,6 @@
         }
 
         .content-grid img {
-          box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.02), 0 2px 25px 0 rgba(0, 0, 0, 0.1);
           width: 100%;
         }
 
@@ -345,60 +359,60 @@
 
       <div class="item">
         <a href="https://app.box.com/s/wp746yqr9ycg23v378t6vyi5wfou532k" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg" class="hvr-grow">
           <h2>Reimagining Whataburger</h2>
         </a>
       </div>
 
       <div class="item">
         <a href="https://www.behance.net/gallery/121453821/Baldwins-Code" target="_blank">
-          <img src="https://bridgesandwaterblog.files.wordpress.com/2021/06/baldwins-code-cover.jpg">
+          <img src="https://bridgesandwaterblog.files.wordpress.com/2021/06/baldwins-code-cover.jpg" class="hvr-grow">
           <h2>Baldwin's Code</h2>
         </a>
       </div>
 
       <div class="item">
         <a href="https://www.behance.net/gallery/130713431/Words" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2021/11/words-hero.jpg">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2021/11/words-hero.jpg" class="hvr-grow">
           <h2>Words</h2>
         </a>
       </div>
 
       <div class="item">
         <a href="https://www.behance.net/gallery/87599561/Bridges-and-Water-Visual-Design-and-Brand-Identity" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160" class="hvr-grow">
           <h2>Bridges and Water</h2>
         </a>
       </div>
 
       <div class="item">
         <a href="https://vimeo.com/312413805" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/twg_hero.png?w=2160">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/twg_hero.png?w=2160" class="hvr-grow">
           <h2>I. The Worst Guys - <i>Childish Gambino</i> (Visualization)</h2>
         </a>
       </div>
 
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bo_hero.png?w=2160">
+        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bo_hero.png?w=2160" class="hvr-grow">
         <h2>Back OFF - <i>bülow</i> (Visualization)</h2>
       </div>
 
       <div class="item">
         <a href="https://vimeo.com/313332124" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160" class="hvr-grow">
           <h2>Design Principles In Motion</h2>
         </a>
       </div>
 
       <div class="item">
         <a href="https://vimeo.com/318351269" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/ais_hero_2.png?w=2160">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/ais_hero_2.png?w=2160" class="hvr-grow">
           <h2>Animation In Squares</h2>
         </a>
       </div>
 
       <div class="item">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160">
+        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160" class="hvr-grow">
         <h2>Donald Glover (Colored Pencil, 30 × 22)</h2>
       </div>
 
