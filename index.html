@@ -116,17 +116,14 @@
 
       .content-grid a {
         text-decoration: none;
-        color: #004B25;
+				color: #004B25;
       }
 
       .content-grid a:hover {
-        background-color: #AD98FF;
-        opacity: 0.75;
-        box-shadow: 10px 10px 60px 0px #004B25;
         transition: all 0.2s ease 0s;
       }
 
-      /* grow */
+      /* grow with mouse hover */
       .hvr-grow {
         display: inline-block;
         vertical-align: middle;
@@ -139,7 +136,9 @@
       .hvr-grow:hover,
       .hvr-grow:focus,
       .hvr-grow:active {
-        transform: scale(1.015);
+      	opacity: 0.75;
+        transform: scale(1.010);
+				transition: ease-out .5s;
       }
 
 
@@ -149,10 +148,6 @@
       }
 
       /* grid anchor -- title text 'hover' attributes */
-      .content-grid a:hover {
-        text-decoration: underline;
-        color: #FDFDFD;
-      }
 
       /* heading 1 */
       h1 {
@@ -171,6 +166,7 @@
         font-style: normal;
         text-decoration: none;
         text-transform: uppercase;
+				padding-top: 1%;
       }
 
       /*--------------------------------------------------------------------------*/
