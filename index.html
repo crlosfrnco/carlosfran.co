@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="main.js"></script>
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>carlosfran.co</title>
@@ -18,26 +15,28 @@
   <style>
     body,
     html {
-      height: 100%;
       background: #72C4AC;
-      width: 100%;
       height: 100%;
+      width: 100%;
       margin: 0;
       padding: 0;
-      overflow: -moz-scrollbars-none;
-      /* Firefox fallback */
-      -ms-overflow-style: none;
-      /* IE/Edge */
-      scrollbar-width: none;
-      /* Firefox */
-      scroll-behavior: smooth;
+      overflow: hidden;
+      cursor: none;
     }
+
+    /*
+    body,
+    html,
+    .scroll-container {
+      outline: 1px dashed red;
+    }*/
+
 
     body {
       background-attachment: fixed;
       background-size: cover;
       background-position: center center;
-      overflow-y: scroll;
+      overflow: hidden;
     }
 
     body::-webkit-scrollbar {
@@ -45,133 +44,197 @@
       /* Chrome/Safari */
     }
 
-    /* unordered list -- horizontal navbar */
-    ul {
+    @font-face {
+      font-family: 'NeueHaasDisplay';
+      src: url('./assets/fonts/NeueHaasDisplayThin.woff2') format('woff2');
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'NeueHaasDisplay';
+      src: url('./assets/fonts/NeueHaasDisplayRoman.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'NeueHaasDisplay';
+      src: url('./assets/fonts/NeueHaasDisplayBold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'FoundersGrotesk';
+      src: url('./assets/fonts/FoundersGroteskMedium.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'FoundersGrotesk';
+      src: url('./assets/fonts/FoundersGroteskBold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    h1 {
+      font-family: 'FoundersGrotesk', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: 'NeueHaasDisplay', sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    ul.navbar {
+      position: fixed;
       list-style: none;
-      list-style-type: none;
-      /* so it disappears on scroll */
-      position: sticky;
-      /* so it sticks longer */
       top: 0;
+      width: 100%;
+      z-index: 9999;
+      pointer-events: auto;
       overflow: hidden;
-      /* so list items don't collide or overlap */
       padding: 0;
       margin: 0;
-      transition: opacity 1.2s ease-out, transform 1.1s ease-out;
+      transition: opacity 0.6s ease, transform 0.4s ease;
     }
 
-    body.scrolled ul {
+    /* For moving navbar on "scroll" */
+    .navbar.scrolled {
       opacity: 0;
-      transform: translateY(-10px);
     }
 
-    /* list item element -- list items in menu (horizontal navbar) */
+    ul h1 {
+      font-family: 'NeueHaasDisplay', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
     li {
-      /* so list items consecutively float left */
       float: right;
       margin: 0;
       padding: 0;
     }
 
-    /* list item element anchor -- menu text attributes */
     li a {
       display: inline-block;
       color: #BCE0C4;
-      font-size: 60%;
       line-height: normal;
-      /* so text is centered within its element */
       text-align: center;
       text-decoration: none;
-      /* to establish element bounds */
       padding: 10px 38px 10px 38px;
       font-size: 8pt;
-      border-radius: 40px;
     }
 
-    /* list item element anchor -- menu text attributes when hovering */
     li a:hover {
-      color: #004B25;
+      color: #004D25;
       transition: all 0.2s ease .0s;
-      border-radius: 40px;
-      /* box-shadow: #004B25 0px 0px 0px 2px, #004B25 0px 0px 0px 1px; */
     }
 
-    /* unordered list image -- wordmark stamp on mobile */
-    ul img {
-      /* so the wordmark does not appear for device-width > 1334 */
-      width: 0;
-    }
-
-    /* hero -- wordmark stamp (device-width > 1334px) */
+    /* Wordmark/Logo */
     .hero {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 0;
+      z-index: 1;
       width: 50vh;
       opacity: 1;
-      /* Optional: for watermark effect */
-      pointer-events: none;
-      /* Prevents blocking interactions */
       transition: opacity 0.8s ease;
     }
 
-    body.scrolled .hero {
+    .hero.scrolled {
       opacity: 0;
     }
 
-    /* mobile hero -- wordmark stamp (device-width < 1334px) */
-    .herom {
-      /* so mobile hero img does not appear on desktops */
-      background: none;
-    }
-
-    /* grid container -- main content */
-    .content-grid {
-      display: grid;
-      grid-template-rows: auto;
-      grid-row-gap: 30vh;
-      padding-bottom: 18vh;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      z-index: 2;
+    .scroll-container {
       position: relative;
-      margin-top: 100vh; /* <- THIS pushes it below the first viewport */
+      top: 0;
+      left: 0;
+      width: 100%;
+      will-change: transform;
+      pointer-events: none;
+      z-index: 2;
+      margin: 0;
+      padding: 0;
+      backface-visibility: hidden;
+      /*outline: 2px solid lime;*/
     }
 
-    .content-grid div {
-      font-size: 50%;
-      text-align: center;
-    }
-
-    /* grid image -- content 'hero' img attributes [img dimensions: 4897 ✕ 3265] */
-    .content-grid img {
-      width: 65%;
-      aspect-ratio: 3 / 2;
-      /* Lock to 3:2 (or your choice) */
-      object-fit: cover;
-      /* Scale image to fill, cropping if needed */
-      height: auto;
-      /* Maintain responsiveness */
-      display: block;
-      /* Remove bottom whitespace (default inline img) */
+    .content-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30vh;
+      width: 60vh;
       margin: 0 auto;
-      /* Center the image if needed */
+      padding-top: 100vh;
+      padding-bottom: 0;
+      position: relative;
+      z-index: 2;
+      /*outline: 2px solid red;*/
+    }
+
+    /* Hard-coded image dimensions: 4897 ✕ 3265 – aspect-ratio fixes this */
+    .content-grid img {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      height: auto;
+      display: block;
+      margin: 0 auto;
       transition: transform 0.3s ease, opacity 0.4s ease;
       border-radius: 4px;
     }
 
+    .content-grid h2 {
+      text-align: justify;
+      margin-top: 20px;
+      font-size: 1em;
+      color: #0E1612;
+      opacity: 0.9;
+      text-transform: lowercase;
+    }
 
     .content-grid a {
       text-decoration: none;
-      color: #004B25;
     }
 
-    .content-grid a:hover {
-      transition: all 0.2s ease 0s;
-      transform: scale(1.1);
+    .item {
+      width: 100%;
+      pointer-events: auto;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .item h2 {
+      font-family: 'FoundersGrotesk', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: lowercase;
     }
 
     /* grow with mouse hover */
@@ -187,44 +250,8 @@
     .hvr-grow:hover,
     .hvr-grow:focus,
     .hvr-grow:active {
-      transform: scale(1.01);
+      transform: scale(1.02);
       transition: ease-out .15s, ease-in .1s;
-    }
-
-
-    /* single grid unit */
-    .item {
-      grid-column: 1 / span 1;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      scroll-snap-align: start; /* Each item aligns at the top of viewport */
-    }
-
-    .item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* grid anchor -- title text 'hover' attributes */
-
-    /* heading 1 */
-    h1 {
-      font-family: neue-haas-grotesk-display, sans-serif;
-      font-weight: 500;
-      font-style: normal;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-
-    /* heading 2 */
-    h2 {
-      font-family: letter-gothic-std, monospace;
-      font-weight: 700;
-      font-style: normal;
-      text-decoration: none;
-      text-transform: lowercase;
     }
 
     #scroll-indicator {
@@ -233,15 +260,15 @@
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
-      z-index: 999;
+      z-index: 9999;
       opacity: 1;
       transition: opacity 0.4s ease;
       pointer-events: none;
-      /* Prevents blocking clicks */
     }
 
     .arrow {
-      font-family: neue-haas-grotesk-display, sans-serif;
+      font-family: 'FoundersGrotesk', sans-serif;
+      font-weight: 400;
       display: block;
       font-size: 3rem;
       color: #BCE0C4;
@@ -263,6 +290,118 @@
 
     #scroll-indicator.hidden {
       opacity: 0;
+    }
+
+    a,
+    button,
+    input,
+    textarea {
+      cursor: none;
+    }
+
+    .scroll-outro {
+      height: 110vh;
+      margin: 0;
+      padding: 0;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      pointer-events: auto;
+      /*: 2px solid blue;*/
+    }
+
+    .outro-text {
+      font-family: 'FoundersGrotesk', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8rem;
+      color: #BCE0C4;
+      text-align: center;
+      letter-spacing: 0em;
+      text-decoration: none;
+      pointer-events: none;
+      z-index: 9999;
+      transition: color 0.2s ease;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      /*outline: 2px solid blue;*/
+    }
+
+    .outro-text:hover {
+      color: #004D25;
+    }
+
+    .outro-text.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Cursor dot element */
+    .cursor-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 225px;
+      height: 225px;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.2s ease-out;
+      transform: translate(-50%, -50%);
+      will-change: transform, opacity;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /*outline: 2px solid lime;*/
+    }
+
+    .cursor-container.shrink {
+      transform: scale(0);
+      transition: transform 0.3s ease-out;
+    }
+
+    .cursor-text {
+      position: absolute;
+      font-family: 'FoundersGrotesk', sans-serif;
+      font-size: 1.1em;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #0E1612;
+      text-align: center;
+      max-width: 125px;
+      white-space: normal;
+      line-height: 1.1;
+      opacity: 0;
+      transition: opacity 0.2s ease-in;
+      pointer-events: none;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .cursor-circle {
+      transition: fill 0.2s ease, transform 0.2s ease;
+      transform-origin: center center;
+      transform: scale(0.5);
+    }
+
+    .cursor-hover-content .cursor-circle {
+      transform: scale(3);
+      fill: #AD98FF;
+    }
+
+    .cursor-hover-nav .cursor-circle {
+      transform: scale(1.25);
+      /* Smaller for nav/buttons */
+      fill: #AD98FF;
     }
 
     /* media rule -- responsive layout for device-width < 1334 */
@@ -305,28 +444,6 @@
         float: none;
         padding-top: 20%;
         padding-bottom: 20%;
-      }
-
-      ul img {
-        width: 100%;
-      }
-
-      /* override hero image */
-      .hero {
-        background: none;
-      }
-
-      .footer {
-        background: none;
-      }
-
-      .herom {
-        background: url("https://carlosfrancoweb.files.wordpress.com/2021/11/cf-wordmark-outline-4k.png") no-repeat fixed 50% 50%;
-        background-size: 100%;
-        width: 100%;
-        height: auto;
-        margin: 0;
-        padding: 0;
       }
 
       .content-grid {
@@ -408,141 +525,234 @@
 
 <body>
 
-  <div class="herom"></div>
-
-  <ul>
-
+  <div class="hero">
+    <img src="./assets/Logo.svg" alt="Carlos Franco Logo">
+  </div>
+  <ul class="navbar">
     <li>
-      <img src="https://carlosfrancoweb.files.wordpress.com/2021/11/cf-wordmark-outline-4k.png">
+      <a href="mailto:design@carlosfran.co" target="_blank">
+        <h1>Contact</h1>
+      </a>
     </li>
-
     <li>
       <a href="https://www.instagram.com/co.ldfoot/" target="_blank">
         <h1>Instagram</h1>
       </a>
     </li>
-
     <li>
       <a href="https://www.linkedin.com/in/crlosfrnco" target="_blank">
         <h1>Linkedin</h1>
       </a>
     </li>
-
     <li>
       <a href="https://app.box.com/file/880021401030?s=3mf13qqgyn1u59m1nxm24yelr6uumgwb" target="_blank">
         <h1>Resume</h1>
       </a>
     </li>
-
   </ul>
 
-  <div class="hero">
-    <img src="./assets/Logo.svg" alt="Carlos Franco Logo">
-  </div>
-
-  <div class="content-grid">
-
-    <div class="item">
-      <a href="https://www.dropbox.com/scl/fi/nfg594fj4mz8cf8600e0m/TES_Ads_Deliverables.pdf?rlkey=uq57sv2eee907ti2rr5wk9b5j&st=u4tx3ndc&dl=0"
-        target="_blank">
-        <img src="./assets/TES_Ads_Mockup_02.jpg" class="hvr-grow">
-        <h2>Telecom Electric Supply</h2>
-      </a>
+  <div class="scroll-container">
+    <div class="content-grid">
+      <div class="item" data-subtitle="Telecom Electric Supply">
+        <a href="https://www.dropbox.com/scl/fi/nfg594fj4mz8cf8600e0m/TES_Ads_Deliverables.pdf?rlkey=uq57sv2eee907ti2rr5wk9b5j&st=u4tx3ndc&dl=0"
+          target="_blank">
+          <img src="./assets/images/TES_Ads_Mockup_02.jpg">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Perot Museum">
+        <a href="https://labs.perotmuseum.org/exhibits/PowTex/" target="_blank">
+          <img src="./assets/images/PowTex_Mockup.png">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Re-imagining Whataburger">
+        <a href="https://app.box.com/s/wp746yqr9ycg23v378t6vyi5wfou532k" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Baldwin's Code">
+        <a href="https://www.behance.net/gallery/121453821/Baldwins-Code" target="_blank">
+          <img src="https://bridgesandwaterblog.files.wordpress.com/2021/06/baldwins-code-cover.jpg">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Words">
+        <a href="https://www.behance.net/gallery/130713431/Words" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2021/11/words-hero.jpg">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Bridges and Water">
+        <a href="https://www.behance.net/gallery/87599561/Bridges-and-Water-Visual-Design-and-Brand-Identity"
+          target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Design Principles">
+        <a href="https://vimeo.com/313332124" target="_blank">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160" class="hvr-grow">
+        </a>
+      </div>
+      <div class="item" data-subtitle="Donald Glover">
+        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160">
+      </div>
     </div>
-
-    <div class="item">
-      <a href="https://app.box.com/s/wp746yqr9ycg23v378t6vyi5wfou532k" target="_blank">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2021/03/wb-hero-02.jpg" class="hvr-grow">
-        <h2>Reimagining Whataburger</h2>
-      </a>
+    <div class="scroll-outro">
+      <a href="#" class="outro-text" id="returnToTop">&#9787;</a>
     </div>
-
-    <div class="item">
-      <a href="https://www.behance.net/gallery/121453821/Baldwins-Code" target="_blank">
-        <img src="https://bridgesandwaterblog.files.wordpress.com/2021/06/baldwins-code-cover.jpg" class="hvr-grow">
-        <h2>Baldwin's Code</h2>
-      </a>
-    </div>
-
-    <div class="item">
-      <a href="https://www.behance.net/gallery/130713431/Words" target="_blank">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2021/11/words-hero.jpg" class="hvr-grow">
-        <h2>Words</h2>
-      </a>
-    </div>
-
-    <div class="item">
-      <a href="https://www.behance.net/gallery/87599561/Bridges-and-Water-Visual-Design-and-Brand-Identity"
-        target="_blank">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160" class="hvr-grow">
-        <h2>Bridges and Water</h2>
-      </a>
-    </div>
-
-    <div class="item">
-      <a href="https://vimeo.com/313332124" target="_blank">
-        <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160" class="hvr-grow">
-        <h2>Design Principles In Motion</h2>
-      </a>
-    </div>
-
-    <div class="item">
-      <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160"
-        class="hvr-grow">
-      <h2>Donald Glover (Colored Pencil, 30 × 22)</h2>
-    </div>
-
   </div>
 
   <div id="scroll-indicator">
     <span class="arrow">&#8595;</span>
   </div>
 
-
+  <!-- "Fake" scroll -->
   <script>
+    let scrollY = 0;
+    let velocity = 0;
+    const friction = 0.12; // Easing factor (lower = slower stop)
+    const sensitivity = 0.7; // Adjusts how fast scroll responds to wheel delta
+    const relativity = 0.0099; // Higher = heavier drag at high speed
+    const scrollContainer = document.querySelector('.scroll-container');
     const scrollIndicator = document.getElementById('scroll-indicator');
+    const navbar = document.querySelector('.navbar');
+    const hero = document.querySelector('.hero');
+    const outro = document.querySelector('.scroll-outro');
+    const outroText = document.querySelector('.outro-text');
 
-    function handleScroll() {
-      if (window.scrollY > 10) {
-        scrollIndicator.classList.add('hidden');
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+
+      velocity += e.deltaY * sensitivity;
+    }, { passive: false });
+
+    function fakeScroll() {
+      const relativeVelocity = velocity * (1 / (1 + Math.abs(velocity) * relativity));
+      // Manually updates scroll-container positioning using velocity settings
+      scrollY += relativeVelocity;
+
+      // Scroll cannot exceed vertical bounds of the container
+      const maxScroll = scrollContainer.scrollHeight - window.innerHeight;
+      scrollY = Math.max(0, Math.min(scrollY, maxScroll));
+
+      scrollContainer.style.transform = `translateY(${-scrollY}px)`;
+
+      velocity *= (1 - friction);
+
+      if (Math.abs(velocity) < 0.05) velocity = 0;
+
+      if (scrollY > 10 && scrollY < maxScroll - 10) {
+        navbar?.classList.add('scrolled');
+        hero?.classList.add('scrolled');
+        scrollIndicator?.classList.add('hidden');
+        outroText.classList.remove('visible');
+      } else if (scrollY <= 10) {
+        navbar?.classList.remove('scrolled');
+        hero?.classList.remove('scrolled');
+        scrollIndicator?.classList.remove('hidden');
       } else {
-        scrollIndicator.classList.remove('hidden');
+        // bottom of page
+        navbar?.classList.remove('scrolled');  // show navbar if desired
+        hero?.classList.add('scrolled');       // keep hero hidden
+        scrollIndicator?.classList.add('hidden');
+        outroText.classList.add('visible');
       }
-    }
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('load', handleScroll);
-  </script>
-
-  <script>
-    const items = document.querySelectorAll('.item');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Remove once it's visible
+      document.querySelectorAll('.item').forEach(item => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9) {
+          item.classList.add('visible');
         }
       });
-    }, {
-      threshold: 0.1
-    });
 
-    items.forEach(item => observer.observe(item));
+      requestAnimationFrame(fakeScroll);
+    }
+
+    fakeScroll();
   </script>
 
   <script>
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        document.body.classList.add('scrolled');
-      } else {
-        document.body.classList.remove('scrolled');
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create wrapper for SVG and text
+      const cursorWrapper = document.createElement("div");
+      cursorWrapper.classList.add("cursor-container");
+
+      // Create SVG dot
+      const svgNS = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(svgNS, "svg");
+      svg.setAttribute("width", "200");
+      svg.setAttribute("height", "200");
+      svg.setAttribute("viewBox", "0 0 48 48");
+
+      const circle = document.createElementNS(svgNS, "circle");
+      circle.setAttribute("cx", "24");
+      circle.setAttribute("cy", "24");
+      circle.setAttribute("r", "6");
+      circle.setAttribute("fill", "#004D25");
+      circle.classList.add("cursor-circle");
+
+      svg.appendChild(circle);
+
+      // Create text element
+      const cursorText = document.createElement("div");
+      cursorText.classList.add("cursor-text");
+
+      // Append all
+      cursorWrapper.appendChild(svg);
+      cursorWrapper.appendChild(cursorText);
+      document.body.appendChild(cursorWrapper);
+
+      const contentGrid = document.querySelector('.content-grid');
+
+      // Track movement
+      window.addEventListener('mousemove', (e) => {
+        cursorWrapper.style.top = `${e.clientY}px`;
+        cursorWrapper.style.left = `${e.clientX}px`;
+
+        // Safari repaint hack
+        cursorWrapper.style.opacity = cursorWrapper.style.opacity === "0.999" ? "1" : "0.999";
+
+        cursorWrapper.classList.remove('cursor-hover-content', 'cursor-hover-nav');
+        cursorText.style.opacity = 0;
+        cursorText.textContent = '';
+
+        const hoveredItem = e.target.closest('.item.visible');
+        const subtitle = hoveredItem?.dataset.subtitle;
+        if (subtitle) {
+          cursorText.textContent = subtitle;
+          cursorText.style.opacity = 1;
+          cursorWrapper.classList.add('cursor-hover-content');
+          return;
+        }
+
+        const navbar = document.querySelector('.navbar');
+        const navbarVisible = !navbar?.classList.contains('scrolled');
+
+        if (navbarVisible && (
+          e.target.closest('ul a, .outro-text') ||
+          e.target.closest('button')
+        )) {
+          cursorWrapper.classList.add('cursor-hover-nav');
+        }
+      });
+
+      // Clear state on mouse leave
+      document.body.addEventListener('mouseleave', () => {
+        cursorWrapper.classList.remove('cursor-hover');
+        cursorText.style.opacity = 0;
+      });
+
+      // Optional: CSS variable tracking
+      document.body.onmousemove = function (e) {
+        document.documentElement.style.setProperty('--x', (e.clientX + window.scrollX) + 'px');
+        document.documentElement.style.setProperty('--y', (e.clientY + window.scrollY) + 'px');
+      };
+
+      document.getElementById('returnToTop')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollY = 0;
+        velocity = 0;
+      });
+
     });
   </script>
-
-
-
 
 </body>
 
