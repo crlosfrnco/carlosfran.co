@@ -704,9 +704,6 @@
         cursorWrapper.style.top = `${e.clientY}px`;
         cursorWrapper.style.left = `${e.clientX}px`;
 
-        // Safari repaint hack
-        cursorWrapper.style.opacity = cursorWrapper.style.opacity === "0.999" ? "1" : "0.999";
-
         cursorWrapper.classList.remove('cursor-hover-content', 'cursor-hover-nav');
         cursorText.style.opacity = 0;
         cursorText.textContent = '';
