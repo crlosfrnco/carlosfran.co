@@ -218,15 +218,15 @@
       width: 100%;
       pointer-events: auto;
       text-align: center;
-      opacity: 1;
-      //transform: translateY(40px);
+      opacity: 0;
+      transform: translateY(40px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    //.item.visible {
-      //opacity: 1;
-      //transform: translateY(0);
-    //}
+    .item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .item h2 {
       font-family: 'FoundersGrotesk', sans-serif;
@@ -357,11 +357,6 @@
       /*outline: 2px solid lime;*/
     }
 
-    .cursor-container.shrink {
-      transform: scale(0);
-      transition: transform 0.3s ease-out;
-    }
-
     .cursor-text {
       position: absolute;
       font-family: 'FoundersGrotesk', sans-serif;
@@ -388,7 +383,7 @@
     .cursor-circle {
       transition: fill 0.2s ease, transform 0.2s ease;
       transform-origin: center center;
-      transform: scale(0.25);
+      transform: scale(0.5);
     }
 
     .cursor-hover-content .cursor-circle {
@@ -397,7 +392,7 @@
     }
 
     .cursor-hover-nav .cursor-circle {
-      transform: scale(1);
+      transform: scale(1.25);
       /* Smaller for nav/buttons */
       fill: #AD98FF;
     }
@@ -653,12 +648,12 @@
         outroText.classList.add('visible');
       }
 
-      //document.querySelectorAll('.item').forEach(item => {
-        //const rect = item.getBoundingClientRect();
-        //if (rect.top < window.innerHeight * 0.9) {
-          //item.classList.add('visible');
-        //}
-      //});
+      document.querySelectorAll('.item').forEach(item => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9) {
+          item.classList.add('visible');
+        }
+      });
 
       requestAnimationFrame(fakeScroll);
     }
@@ -703,6 +698,9 @@
       window.addEventListener('mousemove', (e) => {
         cursorWrapper.style.top = `${e.clientY}px`;
         cursorWrapper.style.left = `${e.clientX}px`;
+
+        // Safari repaint hack
+        cursorWrapper.style.opacity = cursorWrapper.style.opacity === "0.999" ? "1" : "0.999";
 
         cursorWrapper.classList.remove('cursor-hover-content', 'cursor-hover-nav');
         cursorText.style.opacity = 0;
