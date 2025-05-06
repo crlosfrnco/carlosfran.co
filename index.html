@@ -613,14 +613,16 @@
 
     window.addEventListener('DOMContentLoaded', () => {
 
-
-      // GPU kickstart for Safari
-      
-      requestAnimationFrame(() => {
-        scrollContainer.style.transform = 'translateY(0.001px)';
-        scrollContainer.offsetHeight;
-        scrollContainer.style.transform = 'translateY(0)';
-      });
+      // Simulate cursor
+      setTimeout(() => {
+        const trap = document.createElement('input');
+        trap.style.position = 'absolute';
+        trap.style.opacity = '0';
+        trap.style.pointerEvents = 'none';
+        document.body.appendChild(trap);
+        trap.focus();
+        document.body.removeChild(trap);
+      }, 25);
 
       // Scroll
 
