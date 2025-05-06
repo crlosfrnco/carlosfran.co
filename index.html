@@ -397,6 +397,23 @@
       fill: #AD98FF;
     }
 
+    .fake-gpu-kick {
+      transform: translateZ(0.1px);
+      /* forces layer creation */
+      animation: noop 0.01s;
+    }
+
+    @keyframes noop {
+      from {
+        opacity: 1
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+
     /* media rule -- responsive layout for device-width < 1334 */
     @media screen and (max-width: 1334px) {
 
@@ -595,8 +612,7 @@
   <div id="scroll-indicator">
     <span class="arrow">&#8595;</span>
   </div>
-
-  <!-- GPU Handling -->
+  
   <script>
     let scrollY = 0;
     let velocity = 0;
