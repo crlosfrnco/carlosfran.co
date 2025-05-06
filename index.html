@@ -383,7 +383,7 @@
     .cursor-circle {
       transition: fill 0.2s ease, transform 0.2s ease;
       transform-origin: center center;
-      transform: scale(0.25);
+      transform: scale(0.5);
     }
 
     .cursor-hover-content .cursor-circle {
@@ -392,7 +392,7 @@
     }
 
     .cursor-hover-nav .cursor-circle {
-      transform: scale(1);
+      transform: scale(1.25);
       /* Smaller for nav/buttons */
       fill: #AD98FF;
     }
@@ -596,13 +596,14 @@
     <span class="arrow">&#8595;</span>
   </div>
 
-  <!-- "Fake" scroll -->
+  <!-- GPU Handling -->
   <script>
     let scrollY = 0;
     let velocity = 0;
     const friction = 0.12; // Easing factor (lower = slower stop)
     const sensitivity = 0.7; // Adjusts how fast scroll responds to wheel delta
     const relativity = 0.0099; // Higher = heavier drag at high speed
+
     const scrollContainer = document.querySelector('.scroll-container');
     const scrollIndicator = document.getElementById('scroll-indicator');
     const navbar = document.querySelector('.navbar');
@@ -610,59 +611,69 @@
     const outro = document.querySelector('.scroll-outro');
     const outroText = document.querySelector('.outro-text');
 
-    window.addEventListener('wheel', (e) => {
-      e.preventDefault();
+    window.addEventListener('DOMContentLoaded', () => {
 
-      velocity += e.deltaY * sensitivity;
-    }, { passive: false });
 
-    function fakeScroll() {
-      const relativeVelocity = velocity * (1 / (1 + Math.abs(velocity) * relativity));
-      // Manually updates scroll-container positioning using velocity settings
-      scrollY += relativeVelocity;
-
-      // Scroll cannot exceed vertical bounds of the container
-      const maxScroll = scrollContainer.scrollHeight - window.innerHeight;
-      scrollY = Math.max(0, Math.min(scrollY, maxScroll));
-
-      scrollContainer.style.transform = `translateY(${-scrollY}px)`;
-
-      velocity *= (1 - friction);
-
-      if (Math.abs(velocity) < 0.05) velocity = 0;
-
-      if (scrollY > 10 && scrollY < maxScroll - 10) {
-        navbar?.classList.add('scrolled');
-        hero?.classList.add('scrolled');
-        scrollIndicator?.classList.add('hidden');
-        outroText.classList.remove('visible');
-      } else if (scrollY <= 10) {
-        navbar?.classList.remove('scrolled');
-        hero?.classList.remove('scrolled');
-        scrollIndicator?.classList.remove('hidden');
-      } else {
-        // bottom of page
-        navbar?.classList.remove('scrolled');  // show navbar if desired
-        hero?.classList.add('scrolled');       // keep hero hidden
-        scrollIndicator?.classList.add('hidden');
-        outroText.classList.add('visible');
-      }
-
-      document.querySelectorAll('.item').forEach(item => {
-        const rect = item.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.9) {
-          item.classList.add('visible');
-        }
+      // GPU kickstart for Safari
+      
+      requestAnimationFrame(() => {
+        scrollContainer.style.transform = 'translateY(0.001px)';
+        scrollContainer.offsetHeight;
+        scrollContainer.style.transform = 'translateY(0)';
       });
 
-      requestAnimationFrame(fakeScroll);
-    }
+      // Scroll
 
-    fakeScroll();
-  </script>
+      window.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        velocity += e.deltaY * sensitivity;
+      }, { passive: false });
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+      function fakeScroll() {
+        const relativeVelocity = velocity * (1 / (1 + Math.abs(velocity) * relativity));
+        // Manually updates scroll-container positioning using velocity settings
+        scrollY += relativeVelocity;
+
+        // Scroll cannot exceed vertical bounds of the container
+        const maxScroll = scrollContainer.scrollHeight - window.innerHeight;
+        scrollY = Math.max(0, Math.min(scrollY, maxScroll));
+
+        scrollContainer.style.transform = `translateY(${-scrollY}px)`;
+
+        velocity *= (1 - friction);
+
+        if (Math.abs(velocity) < 0.05) velocity = 0;
+
+        if (scrollY > 10 && scrollY < maxScroll - 10) {
+          navbar?.classList.add('scrolled');
+          hero?.classList.add('scrolled');
+          scrollIndicator?.classList.add('hidden');
+          outroText.classList.remove('visible');
+        } else if (scrollY <= 10) {
+          navbar?.classList.remove('scrolled');
+          hero?.classList.remove('scrolled');
+          scrollIndicator?.classList.remove('hidden');
+        } else {
+          // bottom of page
+          navbar?.classList.remove('scrolled');  // show navbar if desired
+          hero?.classList.add('scrolled');       // keep hero hidden
+          scrollIndicator?.classList.add('hidden');
+          outroText.classList.add('visible');
+        }
+
+        document.querySelectorAll('.item').forEach(item => {
+          const rect = item.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9) {
+            item.classList.add('visible');
+          }
+        });
+
+        requestAnimationFrame(fakeScroll);
+      }
+      fakeScroll();
+
+      // Cursor
+
       // Create wrapper for SVG and text
       const cursorWrapper = document.createElement("div");
       cursorWrapper.classList.add("cursor-container");
@@ -745,6 +756,7 @@
       });
 
     });
+
   </script>
 
 </body>
