@@ -612,7 +612,7 @@
   <div id="scroll-indicator">
     <span class="arrow">&#8595;</span>
   </div>
-  
+
   <script>
     let scrollY = 0;
     let velocity = 0;
@@ -629,6 +629,11 @@
 
     window.addEventListener('DOMContentLoaded', () => {
 
+      // Simualte click
+      window.addEventListener('load', () => {
+        document.body.click(); // Test: manually trigger interaction
+      });
+
       // Simulate cursor
       setTimeout(() => {
         const trap = document.createElement('input');
@@ -636,8 +641,10 @@
         trap.style.opacity = '0';
         trap.style.pointerEvents = 'none';
         document.body.appendChild(trap);
+        trap.style.transition = 'transform 0.01s';
+        trap.style.transform = 'scale(1.0001)';
         trap.focus();
-        document.body.removeChild(trap);
+        setTimeout(() => document.body.removeChild(trap), 250); // let Safari digest it
       }, 25);
 
       // Scroll
