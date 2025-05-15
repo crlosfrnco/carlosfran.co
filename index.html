@@ -15,7 +15,7 @@
   <style>
     body,
     html {
-      background: #72C4AC;
+      background: #C9E3C8;
       height: 100%;
       width: 100%;
       margin: 0;
@@ -104,10 +104,11 @@
       list-style: none;
       top: 0;
       width: 100%;
-      z-index: 9999;
+      z-index: 9997;
       pointer-events: auto;
       overflow: hidden;
       padding: 0;
+      padding-top: 20px;
       margin: 0;
       transition: opacity 0.6s ease, transform 0.4s ease;
     }
@@ -133,16 +134,16 @@
 
     li a {
       display: inline-block;
-      color: #BCE0C4;
+      color: #004D25;
       line-height: normal;
       text-align: center;
       text-decoration: none;
       padding: 10px 38px 10px 38px;
-      font-size: 8pt;
+      font-size: 50%;
     }
 
     li a:hover {
-      color: #004D25;
+      color: #AD98FF;
       transition: all 0.2s ease .0s;
     }
 
@@ -153,9 +154,9 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 1;
-      width: 50vh;
+      width: 40vh;
       opacity: 1;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.5s ease;
     }
 
     .hero.scrolled {
@@ -236,41 +237,25 @@
       text-transform: lowercase;
     }
 
-    /* grow with mouse hover */
-    .hvr-grow {
-      display: inline-block;
-      vertical-align: middle;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      transition-duration: 0.33s;
-      transition-property: transform;
-    }
-
-    .hvr-grow:hover,
-    .hvr-grow:focus,
-    .hvr-grow:active {
-      transform: scale(1.02);
-      transition: ease-out .15s, ease-in .1s;
-    }
-
     #scroll-indicator {
       position: fixed;
       bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
-      z-index: 9999;
+      z-index: 9997;
       opacity: 1;
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
 
     .arrow {
-      font-family: 'FoundersGrotesk', sans-serif;
-      font-weight: 400;
+      font-family: 'NeueHaasDisplay', sans-serif;
+      font-weight: 100;
+      text-transform: uppercase;
       display: block;
-      font-size: 3rem;
-      color: #BCE0C4;
+      font-size: 2rem;
+      color: #004D25;
       animation: bounce 1.2s infinite ease-in-out;
       opacity: 1;
     }
@@ -300,34 +285,24 @@
 
     .scroll-outro {
       height: 110vh;
+      width: 100%;
       margin: 0;
       padding: 0;
       flex-shrink: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
-      z-index: 10;
+      z-index: 9999;
       text-align: center;
       pointer-events: auto;
-      /*: 2px solid blue;*/
-    }
-
-    .outro-text {
-      font-family: 'NeueHaasDisplay', sans-serif;
-      font-weight: 700;
+      cursor: none;
+      background: #C9E3C8;
+      font-family: 'FoundersGrotesk', sans-serif;
       text-transform: uppercase;
-      font-size: 8rem;
-      color: #BCE0C4;
-      text-align: center;
-      letter-spacing: 0em;
-      text-decoration: none;
-      pointer-events: none;
-      z-index: 9999;
-      transition: color 0.2s ease;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      /*outline: 2px solid blue;*/
+      font-size: 2rem;
+      font-weight: 700;
     }
 
     .outro-text:hover {
@@ -360,14 +335,13 @@
     .cursor-text {
       position: absolute;
       font-family: 'NeueHaasDisplay', sans-serif;
-      font-size: 1.m;
+      font-size: 1em;
       font-weight: 400;
       text-transform: uppercase;
-      color: #0E1612;
       text-align: center;
       max-width: 125px;
       white-space: normal;
-      line-height: 1.2;
+      line-height: 1.5;
       opacity: 0;
       transition: opacity 0.2s ease-in;
       pointer-events: none;
@@ -383,36 +357,69 @@
     .cursor-circle {
       transition: fill 0.2s ease, transform 0.2s ease;
       transform-origin: center center;
-      transform: scale(0.5);
+      transform: scale(0.25);
+    }
+
+    .cursor-hover-overlay .cursor-circle {
+      transform: scale(1);
+      fill: none;
+    }
+
+    .cursor-hover-overlay .cursor-text {
+      color: #004D25;
+      opacity: 1;
+      font-size: 1em;
     }
 
     .cursor-hover-content .cursor-circle {
       transform: scale(3);
-      fill: #AD98FF;
+      fill: #C9E3C8;
+    }
+
+    .cursor-hover-content .cursor-text {
+      color: #004D25;
+      opacity: 1;
     }
 
     .cursor-hover-nav .cursor-circle {
-      transform: scale(1.25);
+      transform: scale(1);
       /* Smaller for nav/buttons */
       fill: #AD98FF;
     }
 
-    .fake-gpu-kick {
-      transform: translateZ(0.1px);
-      /* forces layer creation */
-      animation: noop 0.01s;
+    .cursor-hover-outro .cursor-circle {
+      transform: scale(1);
+      fill: none;
     }
 
-    @keyframes noop {
-      from {
-        opacity: 1
-      }
-
-      to {
-        opacity: 1
-      }
+    .cursor-hover-outro .cursor-text {
+      color: #004D25;
+      opacity: 1;
+      font-size: 1em;
     }
 
+    #safari-overlay {
+      position: fixed;
+      inset: 0;
+      background: #C9E3C8;
+      font-family: 'FoundersGrotesk', sans-serif;
+      text-transform: uppercase;
+      font-size: 2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      pointer-events: auto;
+      cursor: none;
+    }
+
+    #safari-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
     /* media rule -- responsive layout for device-width < 1334 */
     @media screen and (max-width: 1334px) {
@@ -446,7 +453,6 @@
         font-family: neue-haas-grotesk-display, sans-serif;
         font-weight: 900;
         font-size: 2.5vw;
-        color: #BCE0C4;
         line-height: 300%;
         text-decoration: none;
         display: block;
@@ -489,19 +495,6 @@
         backface-visibility: hidden;
       }
 
-      .overlay {
-        opacity: 0;
-        position: relative;
-        background-image: linear-gradient(to right, #96D6C1, #BCE0C4);
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        transform: translate(0%, -100%);
-        -ms-transform: translate(0%, -100%);
-        transition: .2s ease;
-        text-align: center;
-      }
-
       .item:hover .image {
         opacity: 0.3;
       }
@@ -535,6 +528,9 @@
 
 <body>
 
+  <div id="safari-overlay" data-subtitle="enter">
+  </div>
+
   <div class="hero">
     <img src="./assets/Logo.svg" alt="Carlos Franco Logo">
   </div>
@@ -550,7 +546,7 @@
       </a>
     </li>
     <li>
-      <a href="https://www.linkedin.com/in/crlosfrnco" target="_blank">
+      <a href="https://www.linkedin.com/in/carlosfran-co" target="_blank">
         <h1>Linkedin</h1>
       </a>
     </li>
@@ -595,17 +591,16 @@
           <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160">
         </a>
       </div>
-      <div class="item" data-subtitle="Design Principles">
+      <div class="item" data-subtitle="Design in Motion">
         <a href="https://vimeo.com/313332124" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160" class="hvr-grow">
+          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160">
         </a>
       </div>
-      <div class="item" data-subtitle="Donald Glover">
+      <div class="item" data-subtitle="Donald Glover (Pencil)">
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160">
       </div>
     </div>
-    <div class="scroll-outro">
-      <a href="#" class="outro-text" id="returnToTop">&#9787;</a>
+    <div class="scroll-outro" id="return-to-top" data-subtitle="back to top">
     </div>
   </div>
 
@@ -619,35 +614,42 @@
     const friction = 0.12; // Easing factor (lower = slower stop)
     const sensitivity = 0.7; // Adjusts how fast scroll responds to wheel delta
     const relativity = 0.0099; // Higher = heavier drag at high speed
+    let mouseX = 0;
+    let mouseY = 0;
 
     const scrollContainer = document.querySelector('.scroll-container');
     const scrollIndicator = document.getElementById('scroll-indicator');
     const navbar = document.querySelector('.navbar');
     const hero = document.querySelector('.hero');
     const outro = document.querySelector('.scroll-outro');
-    const outroText = document.querySelector('.outro-text');
 
     window.addEventListener('DOMContentLoaded', () => {
-
-      // Simualte click
-      window.addEventListener('load', () => {
-        document.body.click(); // Test: manually trigger interaction
+      document.addEventListener('click', () => {
+        cursorText.textContent = '';
+        cursorText.style.opacity = 0;
+        cursorCircle.style.transform = 'scale(0.25)';
       });
 
-      // Simulate cursor
-      setTimeout(() => {
-        const trap = document.createElement('input');
-        trap.style.position = 'absolute';
-        trap.style.opacity = '0';
-        trap.style.pointerEvents = 'none';
-        document.body.appendChild(trap);
-        trap.style.transition = 'transform 0.01s';
-        trap.style.transform = 'scale(1.0001)';
-        trap.focus();
-        setTimeout(() => document.body.removeChild(trap), 250); // let Safari digest it
-      }, 25);
+      // Simple Safari detection
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-      // Scroll
+      if (isSafari) {
+        const overlay = document.getElementById('safari-overlay');
+
+        overlay.addEventListener('click', () => {
+          overlay.classList.add('hidden');
+
+          // Delay full removal so transition completes
+          setTimeout(() => {
+            overlay.remove();
+            updateCursorState(); // Reset classes/text
+          }, 500);
+        });
+      } else {
+        // Remove overlay for non-Safari browsers
+        const overlay = document.getElementById('safari-overlay');
+        if (overlay) overlay.remove();
+      }
 
       window.addEventListener('wheel', (e) => {
         e.preventDefault();
@@ -673,7 +675,6 @@
           navbar?.classList.add('scrolled');
           hero?.classList.add('scrolled');
           scrollIndicator?.classList.add('hidden');
-          outroText.classList.remove('visible');
         } else if (scrollY <= 10) {
           navbar?.classList.remove('scrolled');
           hero?.classList.remove('scrolled');
@@ -683,7 +684,6 @@
           navbar?.classList.remove('scrolled');  // show navbar if desired
           hero?.classList.add('scrolled');       // keep hero hidden
           scrollIndicator?.classList.add('hidden');
-          outroText.classList.add('visible');
         }
 
         document.querySelectorAll('.item').forEach(item => {
@@ -696,8 +696,6 @@
         requestAnimationFrame(fakeScroll);
       }
       fakeScroll();
-
-      // Cursor
 
       // Create wrapper for SVG and text
       const cursorWrapper = document.createElement("div");
@@ -714,7 +712,7 @@
       circle.setAttribute("cx", "24");
       circle.setAttribute("cy", "24");
       circle.setAttribute("r", "6");
-      circle.setAttribute("fill", "#004D25");
+      circle.setAttribute("fill", "#004d25");
       circle.classList.add("cursor-circle");
 
       svg.appendChild(circle);
@@ -730,24 +728,54 @@
 
       const contentGrid = document.querySelector('.content-grid');
 
+      function updateCursorState() {
+        cursorWrapper.classList.remove(
+          'cursor-hover-content',
+          'cursor-hover-nav',
+          'cursor-hover-overlay',
+          'cursor-hover-outro'
+        );
+
+        cursorText.style.opacity = 0;
+        cursorText.textContent = '';
+      }
+
       // Track movement
       window.addEventListener('mousemove', (e) => {
-        cursorWrapper.style.top = `${e.clientY}px`;
-        cursorWrapper.style.left = `${e.clientX}px`;
 
-        // Safari repaint hack
-        cursorWrapper.style.opacity = cursorWrapper.style.opacity === "0.999" ? "1" : "0.999";
+        mouseX = e.clientX;
+        mouseY = e.clientY;
 
-        cursorWrapper.classList.remove('cursor-hover-content', 'cursor-hover-nav');
+        cursorWrapper.style.top = `${mouseY}px`;
+        cursorWrapper.style.left = `${mouseX}px`;
+
+        cursorWrapper.classList.remove(
+          'cursor-hover-content',
+          'cursor-hover-nav',
+          'cursor-hover-overlay',
+          'cursor-hover-outro'
+        );
+
         cursorText.style.opacity = 0;
         cursorText.textContent = '';
 
+        const hoveredOverlay = e.target.closest('#safari-overlay');
         const hoveredItem = e.target.closest('.item.visible');
-        const subtitle = hoveredItem?.dataset.subtitle;
+        const hoveredOutro = e.target.closest('#return-to-top');
+        const subtitle = hoveredItem?.dataset.subtitle || hoveredOverlay?.dataset.subtitle || hoveredOutro?.dataset.subtitle;
+
         if (subtitle) {
           cursorText.textContent = subtitle;
           cursorText.style.opacity = 1;
-          cursorWrapper.classList.add('cursor-hover-content');
+
+          if (hoveredOverlay) {
+            cursorWrapper.classList.add('cursor-hover-overlay'); // ✅ Overlay-specific class
+          } else if (hoveredOutro) {
+            cursorWrapper.classList.add('cursor-hover-outro');
+          } else {
+            cursorWrapper.classList.add('cursor-hover-content'); // ✅ Default item class
+          }
+
           return;
         }
 
@@ -774,10 +802,14 @@
         document.documentElement.style.setProperty('--y', (e.clientY + window.scrollY) + 'px');
       };
 
-      document.getElementById('returnToTop')?.addEventListener('click', (e) => {
+      document.getElementById('return-to-top')?.addEventListener('click', (e) => {
         e.preventDefault();
         scrollY = 0;
         velocity = 0;
+        // Force cursor to visually reappear at the same position
+        cursorWrapper.style.top = `${mouseY}px`;
+        cursorWrapper.style.left = `${mouseX}px`;
+        updateCursorState();
       });
 
     });
