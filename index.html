@@ -31,7 +31,6 @@
       outline: 1px dashed red;
     }*/
 
-
     body {
       background-attachment: fixed;
       background-size: cover;
@@ -421,106 +420,93 @@
       pointer-events: none;
     }
 
-    /* media rule -- responsive layout for device-width < 1334 */
-    @media screen and (max-width: 1334px) {
+    @media (max-width: 900px),
+    (pointer: coarse) {
 
-      body,
-      html {
-        background: #004B25;
-        width: auto;
-        height: auto;
-        margin: 0;
-        padding: 0;
+      html,
+      body {
+        height: 100vh;
       }
 
-      ul {
-        background-image: linear-gradient(#004B25, #72C4AC);
-        position: static;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin-top: 0;
-        margin-bottom: auto;
+      a,
+      button,
+      input,
+      textarea {
+        cursor: auto !important;
       }
 
-      /* list item element -- list items in menu (vertical navbar) */
-      li {
-        /* so float property does not inherit left alignment and keeps its text position consecutively vertical */
-        float: none;
-      }
-
-      li a {
-        font-family: neue-haas-grotesk-display, sans-serif;
-        font-weight: 900;
-        font-size: 2.5vw;
-        line-height: 300%;
-        text-decoration: none;
-        display: block;
-        text-align: center;
-        float: none;
-        padding-top: 20%;
-        padding-bottom: 20%;
-      }
-
+      .cursor-container,
+      #scroll-indicator,
+      #safari-overlay,
+      .scroll-container,
       .content-grid {
-        background: #004B25;
-        display: grid;
-        grid-template-columns: auto;
-        grid-gap: 0;
-        margin: 0;
-        padding: 0;
+        display: none !important;
       }
 
-      /* grid containter division -- grid item titles */
-      .content-grid>div {
-        /* no titles on mobile */
-        font-size: 0;
-        padding-bottom: 0%;
+      .navbar {
+        position: relative;
+        height: 100vh;
+        box-sizing: border-box;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
       }
 
-      .content-grid img {
-        width: 100%;
-      }
-
-      /* grid anchor -- title text attributes when hovering */
-      .content-grid img:visited {
-        background-color: #96D6C1;
-        color: #FDFDFD;
-      }
-
-      .image {
-        display: block;
-        width: 100%;
-        height: auto;
-        backface-visibility: hidden;
-      }
-
-      .item:hover .image {
-        opacity: 0.3;
-      }
-
-      .item:hover .text {
-        opacity: 1;
-      }
-
-      .text {
-        font-family: neue-haas-grotesk-display, sans-serif;
-        font-weight: 900;
-        font-size: 2.5vw;
-        color: #FDFDFD;
-        position: absolute;
-        background: #FDFDFD;
-        top: 50%;
-        left: 50%;
-        line-height: normal;
+      .navbar li {
+        position: static;
         text-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
-        transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%) -ms-transform: translate(-50%, -50%);
-        transition: .2s ease;
       }
 
+      .navbar li a {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        display: inline;
+        white-space: nowrap;
+        overflow: visible;
+      }
+
+      .hero {
+        display: none;
+      }
+
+      .item {
+        display: none !important;
+      }
+
+      /* This is the new rule that fixes the line break issue. */
+      .navbar li a h1 {
+        display: inline;
+        font-size: inherit;
+        /* Forces the h1 to not create a new line */
+      }
+
+      /* Add a pseudo-element before each link's text */
+      .navbar li a::before {
+        /* The margin has been removed as requested */
+      }
+
+      /* 1st link: Contact (Envelope icon) */
+      .navbar li:nth-child(1) a::before {
+        content: '\261E\FE0E';
+        
+      }
+
+      /* 2nd link: Instagram (Camera icon) */
+      .navbar li:nth-child(2) a::before {
+        content: '\2604\FE0E';
+      }
+
+      /* 3rd link: Linkedin (Briefcase icon) */
+      .navbar li:nth-child(3) a::before {
+        content: '\263A\FE0E';
+      }
+
+      /* 4th link: Resume (Document icon) */
+      .navbar li:nth-child(4) a::before {
+        content: '\2604\FE0E';
+      }
     }
   </style>
 
@@ -813,6 +799,26 @@
       });
 
     });
+
+    // Disable fake scroll and cursor if on mobile/touch
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod|Touch/.test(navigator.userAgent) || window.innerWidth < 769;
+
+    if (isMobile) {
+      window.addEventListener('DOMContentLoaded', () => {
+        const cursor = document.querySelector('.cursor-container');
+        if (cursor) cursor.remove();
+
+        const scrollContainer = document.querySelector('.scroll-container');
+        scrollContainer.style.transform = 'none';
+        scrollContainer.style.position = 'static';
+        scrollContainer.style.overflowY = 'auto';
+
+        // Disable all scroll velocity listeners
+        window.removeEventListener('wheel', () => { });
+        // Remove animation frame if any
+        if (typeof cancelAnimationFrame === 'function') cancelAnimationFrame(fakeScroll);
+      });
+    }
 
   </script>
 
