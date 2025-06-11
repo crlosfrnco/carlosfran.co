@@ -463,8 +463,6 @@
         font-size: 2rem;
         line-height: 2.5rem;
         display: inline;
-        white-space: nowrap;
-        overflow: visible;
       }
 
       .hero {
@@ -482,29 +480,24 @@
         /* Forces the h1 to not create a new line */
       }
 
-      /* Add a pseudo-element before each link's text */
-      .navbar li a::before {
-        /* The margin has been removed as requested */
-      }
-
       /* 1st link: Contact (Envelope icon) */
-      .navbar li:nth-child(1) a::before {
-        content: '\261E\FE0E';
+      .navbar li:nth-child(1) a::after {
+        content: '\261C\FE0E';
         
       }
 
       /* 2nd link: Instagram (Camera icon) */
-      .navbar li:nth-child(2) a::before {
+      .navbar li:nth-child(2) a::after {
         content: '\2604\FE0E';
       }
 
       /* 3rd link: Linkedin (Briefcase icon) */
-      .navbar li:nth-child(3) a::before {
+      .navbar li:nth-child(3) a::after {
         content: '\263A\FE0E';
       }
 
       /* 4th link: Resume (Document icon) */
-      .navbar li:nth-child(4) a::before {
+      .navbar li:nth-child(4) a::after {
         content: '\2604\FE0E';
       }
     }
