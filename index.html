@@ -552,7 +552,7 @@
       .mobile-list {
         text-align: right;
         position: fixed;
-        bottom: 20px;
+        bottom: 30px;
         right: 20px;
         max-width: 45vw;
         z-index: 2;
@@ -1089,7 +1089,10 @@
     document.addEventListener('click', (event) => {
       // Check if the clicked element is an anchor or is inside an anchor
       const isAnchorClick = event.target.closest('a');
-      if (!isAnchorClick) {
+      // Check if image preview is active
+      const isImagePreviewActive = document.getElementById('mobile-image-preview');
+      
+      if (!isAnchorClick && !isImagePreviewActive) {
         toggleDarkMode(event);
       }
     });
