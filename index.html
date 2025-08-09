@@ -1092,7 +1092,7 @@
       // Check if image preview is active
       const isImagePreviewActive = document.getElementById('mobile-image-preview');
       
-      if (!isAnchorClick && !isImagePreviewActive) {
+      if (isAnchorClick && !isImagePreviewActive) {
         toggleDarkMode(event);
       }
     });
