@@ -1089,10 +1089,8 @@
     document.addEventListener('click', (event) => {
       // Check if the clicked element is an anchor or is inside an anchor
       const isAnchorClick = event.target.closest('a');
-      // Check if image preview is active
-      const isImagePreviewActive = document.getElementById('mobile-image-preview');
       
-      if (!isAnchorClick && isImagePreviewActive) {
+      if (!isAnchorClick) {
         toggleDarkMode(event);
       }
     });
