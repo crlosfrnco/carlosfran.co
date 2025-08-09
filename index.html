@@ -694,7 +694,7 @@
       .mobile-bio p,
       .mobile-list h3,
       .mobile-list li {
-        font-size: clamp(14pt, 4vw, 18pt);
+        font-size: clamp(12pt, 3.5vw, 16pt);
       }
 
       .mobile-list h3 {
@@ -955,15 +955,24 @@
         // Create preview container
         const previewContainer = document.createElement('div');
         previewContainer.id = 'mobile-image-preview';
-        
+
+        // Compute preview size with 40px margin safety on all sides
+        const margin = 40;
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const desiredWidth = viewportWidth * 0.7;  // 70vw
+        const desiredHeight = viewportWidth * 0.5; // 50vw
+        const finalWidth = Math.min(desiredWidth, Math.max(0, viewportWidth - margin * 2));
+        const finalHeight = Math.min(desiredHeight, Math.max(0, viewportHeight - margin * 2));
+
         // Only apply random positioning for devices 480px or smaller
-        if (window.innerWidth <= 480) {
-          // Calculate random position within 20px edge margins
-          const maxX = window.innerWidth - 70 - 40; // 70vw width - 40px total margins
-          const maxY = window.innerHeight - 50 - 40; // 50vw height - 40px total margins
-          const randomX = Math.max(20, Math.min(maxX, Math.random() * maxX));
-          const randomY = Math.max(20, Math.min(maxY, Math.random() * maxY));
-          
+        if (viewportWidth <= 480) {
+          // Random position clamped to keep the full preview within a 40px margin
+          const rangeX = Math.max(0, viewportWidth - margin * 2 - finalWidth);
+          const rangeY = Math.max(0, viewportHeight - margin * 2 - finalHeight);
+          const randomX = margin + (rangeX > 0 ? Math.random() * rangeX : 0);
+          const randomY = margin + (rangeY > 0 ? Math.random() * rangeY : 0);
+
           previewContainer.style.cssText = `
             position: fixed;
             top: ${randomY}px;
@@ -989,9 +998,11 @@
         const previewImg = document.createElement('img');
         previewImg.src = imgSrc;
         previewImg.style.cssText = `
-          width: 70vw;
-          height: 50vw;
+          width: ${finalWidth}px;
+          height: ${finalHeight}px;
           object-fit: cover;
+          max-width: calc(100vw - ${margin * 2}px);
+          max-height: calc(100vh - ${margin * 2}px);
         `;
 
         // Append elements
