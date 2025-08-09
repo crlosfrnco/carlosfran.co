@@ -1097,7 +1097,13 @@
     }
 
     // Toggle dark/light mode on any click on the screen, except anchor links
-    document.addEventListener('click', toggleDarkMode);
+    document.addEventListener('click', (event) => {
+      // Check if the clicked element is an anchor or is inside an anchor
+      const isAnchorClick = event.target.closest('a');
+      if (!isAnchorClick) {
+        toggleDarkMode(event);
+      }
+    });
 
     document.addEventListener('keydown', (event) => {
       if (event.key === " ") {
