@@ -13,9 +13,31 @@
   <link rel="stylesheet" href="https://use.typekit.net/cot8upx.css">
 
   <style>
+    :root {
+      --bg: #ececc7;
+      --text: #2b4227;
+      --primary: #45744E;
+      --accent: #AD98FF;
+      --width: 60vw;
+
+      /* Dark mode colors */
+      --bg-dark: #2b4227;
+      --text-dark: #ececc7;
+      --primary-dark: #4CAF50;
+      --accent-dark: #aeb0f3;
+    }
+
+    /* Dark mode class */
+    body.dark-mode {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --primary: var(--primary-dark);
+      --accent: var(--accent-dark);
+    }
+
     body,
     html {
-      background: #C9E3C8;
+      background: var(--bg);
       height: 100%;
       width: 100%;
       margin: 0;
@@ -36,6 +58,7 @@
       background-size: cover;
       background-position: center center;
       overflow: hidden;
+      color: var(--text);
     }
 
     body::-webkit-scrollbar {
@@ -98,17 +121,33 @@
       text-decoration: none;
     }
 
+    .toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2;
+      font-family: 'NeueHaasDisplay', sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: 1em;
+      line-height: 1.4;
+      text-align: justify;
+      opacity: 1;
+    }
+
+    .toggle p {
+      margin: 0;
+      padding: 0;
+    }
+
     ul.navbar {
       position: fixed;
       list-style: none;
-      top: 0;
-      width: 100%;
+      width: 100vw;
+      height: 2.5em;
       z-index: 9997;
       pointer-events: auto;
-      overflow: hidden;
-      padding: 0;
-      padding-top: 20px;
-      margin: 0;
+      margin: 0px 0px 20px 0px;
       transition: opacity 0.6s ease, transform 0.4s ease;
     }
 
@@ -117,32 +156,31 @@
       opacity: 0;
     }
 
-    ul h1 {
+    .toggle.scrolled {
+      opacity: 0;
+    }
+
+    ul a {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      color: var(--text);
+      text-transform: uppercase;
+      text-decoration: none;
+      font-style: normal;
       font-family: 'NeueHaasDisplay', sans-serif;
       font-weight: 400;
-      font-style: normal;
-      text-decoration: none;
       text-transform: uppercase;
-    }
-
-    li {
-      float: right;
-      margin: 0;
-      padding: 0;
-    }
-
-    li a {
-      display: inline-block;
-      color: #004D25;
-      line-height: normal;
-      text-align: center;
-      text-decoration: none;
-      padding: 10px 38px 10px 38px;
-      font-size: 50%;
+      font-size: 1em;
+      line-height: 1.4;
     }
 
     li a:hover {
-      color: #AD98FF;
+      color: var(--accent);
       transition: all 0.2s ease .0s;
     }
 
@@ -156,6 +194,10 @@
       width: 40vh;
       opacity: 1;
       transition: opacity 0.5s ease;
+    }
+
+    .hero svg .st0 {
+      fill: var(--text);
     }
 
     .hero.scrolled {
@@ -205,7 +247,6 @@
       text-align: justify;
       margin-top: 20px;
       font-size: 1em;
-      color: #0E1612;
       opacity: 0.9;
       text-transform: lowercase;
     }
@@ -238,7 +279,7 @@
 
     #scroll-indicator {
       position: fixed;
-      bottom: 50px;
+      bottom: 15px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -248,14 +289,13 @@
       pointer-events: none;
     }
 
-    .arrow {
+    .scroll {
       font-family: 'NeueHaasDisplay', sans-serif;
-      font-weight: 100;
+      font-weight: 400;
       text-transform: uppercase;
-      display: block;
-      font-size: 2rem;
-      color: #004D25;
-      animation: bounce 1.2s infinite ease-in-out;
+      font-size: 1em;
+      color: var(--text);
+      animation: bounce 1.5s infinite cubic-bezier(0.68, -0.56, 0.265, 1.55);
       opacity: 1;
     }
 
@@ -267,7 +307,7 @@
       }
 
       50% {
-        transform: translateY(8px);
+        transform: translateY(4px);
       }
     }
 
@@ -297,7 +337,6 @@
       text-align: center;
       pointer-events: auto;
       cursor: none;
-      background: #C9E3C8;
       font-family: 'FoundersGrotesk', sans-serif;
       text-transform: uppercase;
       font-size: 2rem;
@@ -305,7 +344,7 @@
     }
 
     .outro-text:hover {
-      color: #004D25;
+      color: var(--text);
     }
 
     .outro-text.visible {
@@ -365,25 +404,24 @@
     }
 
     .cursor-hover-overlay .cursor-text {
-      color: #004D25;
       opacity: 1;
       font-size: 1em;
     }
 
     .cursor-hover-content .cursor-circle {
       transform: scale(3);
-      fill: #C9E3C8;
+      fill: var(--bg);
     }
 
     .cursor-hover-content .cursor-text {
-      color: #004D25;
+      color: var(--text);
       opacity: 1;
     }
 
     .cursor-hover-nav .cursor-circle {
       transform: scale(1);
       /* Smaller for nav/buttons */
-      fill: #AD98FF;
+      fill: var(--accent);
     }
 
     .cursor-hover-outro .cursor-circle {
@@ -392,7 +430,7 @@
     }
 
     .cursor-hover-outro .cursor-text {
-      color: #004D25;
+      color: var(--text);
       opacity: 1;
       font-size: 1em;
     }
@@ -400,7 +438,7 @@
     #safari-overlay {
       position: fixed;
       inset: 0;
-      background: #C9E3C8;
+      background: var(--bg);
       font-family: 'FoundersGrotesk', sans-serif;
       text-transform: uppercase;
       font-size: 2rem;
@@ -428,78 +466,164 @@
         height: 100vh;
       }
 
-      a,
-      button,
-      input,
-      textarea {
-        cursor: auto !important;
-      }
-
       .cursor-container,
       #scroll-indicator,
-      #safari-overlay,
-      .scroll-container,
-      .content-grid {
+      #safari-overlay {
         display: none !important;
       }
 
       .navbar {
-        position: relative;
-        height: 90%;
-        box-sizing: border-box;
+        position: absolute;
+        height: 100%;
         z-index: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
         align-items: center;
       }
 
-      .navbar li {
-        position: static;
-        text-align: center;
-      }
-
-      .navbar li a {
-        font-size: 2rem;
-        line-height: 2.5rem;
-        display: inline;
-      }
-
-      .hero {
-        display: none;
-      }
-
-      .item {
+      /* experimenting */
+      .navbar {
         display: none !important;
       }
 
-      /* This is the new rule that fixes the line break issue. */
-      .navbar li a h1 {
-        display: inline;
-        font-size: inherit;
-        /* Forces the h1 to not create a new line */
+      /* Wordmark/Logo */
+      .hero {
+        position: fixed;
+        z-index: 1;
+        width: 40vw;
+        height: auto;
+        padding: 0;
+        top: 20px;
+        left: 20px;
+        transform: none;
       }
 
-      /* 1st link: Contact (Envelope icon) */
-      .navbar li:nth-child(1) a::after {
-        content: '\261C\FE0E';
-        
+      .scroll-container {
+        display: none !important;
       }
 
-      /* 2nd link: Instagram (Camera icon) */
-      .navbar li:nth-child(2) a::after {
+      /* Mobile Bio Section */
+      .mobile-bio {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 45vw;
+        z-index: 2;
+        font-family: 'NeueHaasDisplay', sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 1em;
+        line-height: 1.4;
+        text-align: justify;
+      }
+
+      .mobile-bio p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .mobile-bio em {
+        font-family: 'FoundersGrotesk', sans-serif;
+        font-size: 1.1em;
+        line-height: 0;
+        color: var(--accent);
+        text-transform: uppercase;
+        text-decoration: none;
+        font-style: normal;
+      }
+
+      .mobile-bio a {
+        font-size: 1em;
+        line-height: 1;
+        background: none;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        color: var(--text);
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-style: normal;
+      }
+
+      .mobile-bio a:hover {
+        font-size: 1em;
+        line-height: 1;
+        color: var(--accent);
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-style: normal;
+      }
+
+      .toggle {
+        display: none !important;
+      }
+
+      .mobile-list {
+        text-align: right;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 45vw;
+        z-index: 2;
+        text-transform: uppercase;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+      }
+
+      .mobile-list h3 {
+        font-family: 'FoundersGrotesk', sans-serif;
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 1;
+        color: var(--accent);
+        text-transform: uppercase;
+        text-decoration: none;
+        font-style: normal;
+      }
+
+      .mobile-list ul {
+        font-family: 'NeueHaasGrotesk', sans-serif;
+        font-weight: 400;
+        font-size: 1em;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .mobile-list li {
+        margin-bottom: 12px;
+        font-size: 1rem;
+        line-height: 1.4;
+        display: block;
+        width: 100%;
+        clear: both;
+      }
+
+      .mobile-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      .mobile-list li:hover {
+        color: var(--accent);
+      }
+
+      /*
+      .navbar li:nth-child(1) a::before {
+        content: '\261E\FE0E';
+      }
+
+      .navbar li:nth-child(2) a::before {
         content: '\270C\FE0E';
       }
 
-      /* 3rd link: Linkedin (Briefcase icon) */
-      .navbar li:nth-child(3) a::after {
+      .navbar li:nth-child(3) a::before {
         content: '\26D3\FE0E';
       }
 
-      /* 4th link: Resume (Document icon) */
-      .navbar li:nth-child(4) a::after {
+      .navbar li:nth-child(4) a::before {
         content: '\2604\FE0E';
       }
+      */
     }
   </style>
 
@@ -509,16 +633,53 @@
 
   <div id="safari-overlay" data-subtitle="enter">
   </div>
-
   <div class="hero">
-    <img src="./assets/Logo.svg" alt="Carlos Franco Logo">
+    <?xml version="1.0" encoding="utf-8"?>
+    <!-- Generator: Adobe Illustrator 28.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <svg version="1.1" id="a" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+      y="0px" viewBox="0 0 1276.6 462.51" style="enable-background:new 0 0 1276.6 462.51;" xml:space="preserve">
+      <path class="st0" d="M105.43,0c63,0,96.62,40.14,100.53,91.39l-53.21,1.96c-3.26-22.85-15.67-44.06-47.65-44.06
+	s-47.99,22.52-47.99,57.44s17.64,57.44,47.99,57.44c31.99,0,44.39-21.21,47.66-44.06l53.21,2.28
+	c-3.92,51.26-37.54,91.06-100.53,91.06S0,170.04,0,106.72S45.37,0,105.43,0z" />
+      <path class="st0" d="M294.37,128.26h48.32l-23.5-60.7h-1.31L294.37,128.26z M351.17,3.92l81.93,205.61h-59.08l-15.35-39.82h-80.29
+	l-15.34,39.82h-55.83L289.15,3.92H351.17L351.17,3.92z" />
+      <path class="st0" d="M548.45,98.58c23.5,0,35.25-5.87,35.25-24.81c0-16.64-11.75-25.46-35.25-25.46h-39.5v50.26L548.45,98.58
+	L548.45,98.58z M584.7,209.55c-4.24-5.55-6.86-18.28-8.49-39.49c-1.63-23.5-11.75-28.72-30.36-28.72h-36.88v68.21h-55.79V3.92
+	h105.06c53.21,0,79.65,25.13,79.65,65.27c0,30.03-18.61,49.61-43.74,52.87c21.22,4.24,34.88,16.31,37.16,40.14
+	c2.94,30.68,2.66,39.82,9.51,47.32h-56.13L584.7,209.55z" />
+      <polygon class="st0" points="725.85,3.92 725.85,163.84 827.69,163.84 827.69,209.53 670.36,209.53 670.36,3.92 " />
+      <path class="st0" d="M944.55,50.21c-30.36,0-49.6,22.85-49.6,57.77s19.26,57.77,49.6,57.77s49.6-22.85,49.6-57.77
+	S974.9,50.21,944.55,50.21z M944.55,214.7c-59.73,0-106.74-43.41-106.74-106.72s47-106.72,106.74-106.72s106.74,43.41,106.74,106.72
+	S1004.28,214.7,944.55,214.7L944.55,214.7z" />
+      <path class="st0" d="M1131.31,135.12c1.96,25.79,21.87,34.6,44.72,34.6c19.26,0,31.66-6.85,31.66-18.28
+	c0-12.08-12.08-14.03-27.75-16.98l-37.54-6.53c-33.62-6.2-57.12-25.13-57.12-61.03c0-41.77,32.64-66.9,83.89-66.9
+	c56.8,0,87.48,27.74,88.46,73.43l-50.93,0.98c-1.63-21.22-16.98-31-38.19-31c-18.28,0-28.72,7.18-28.72,18.6
+	c0,9.47,7.84,13.05,20.57,15.34l38.84,6.86c43.09,7.51,62.67,30.03,62.67,63.64c0,43.74-37.86,65.6-85.85,65.6
+	c-55.82,0-95.64-27.09-95.64-76.7L1131.31,135.12L1131.31,135.12z" />
+      <polygon class="st0" points="10.17,458.59 10.17,252.98 165.55,252.98 165.55,298.67 65.68,298.67 65.68,338.16 140.74,338.16 
+	140.74,383.2 65.67,383.2 65.67,458.59 " />
+      <path class="st0" d="M283.04,347.63c23.5,0,35.25-5.88,35.25-24.8c0-16.64-11.75-25.46-35.25-25.46h-39.49v50.26L283.04,347.63
+	L283.04,347.63z M319.27,458.59c-4.24-5.55-6.85-18.28-8.48-39.49c-1.63-23.5-11.75-28.72-30.36-28.72h-36.88v68.21h-54.51V252.98
+	h103.8c53.21,0,79.64,25.13,79.64,65.27c0,30.03-18.6,49.59-43.74,52.87c21.22,4.24,33.62,16.31,35.9,40.14
+	c2.94,30.68,3.92,39.82,10.77,47.32h-56.15L319.27,458.59z" />
+      <path class="st0" d="M476.85,377.33h48.31l-23.5-60.7h-1.3l-23.5,60.7H476.85z M533.65,252.98l81.93,205.61H556.5l-15.34-39.82
+	h-80.29l-15.35,39.82H389.7l81.93-205.61H533.65L533.65,252.98z" />
+      <polygon class="st0" points="768.48,366.88 768.48,252.98 819.41,252.98 819.41,458.59 775.01,458.59 686.23,336.86 686.23,458.59 
+	635.3,458.59 635.3,252.98 688.18,252.98 " />
+      <path class="st0" d="M946.99,249.06c63,0,96.62,40.14,100.53,91.39l-53.21,1.96c-3.26-22.85-15.67-44.06-47.66-44.06
+	s-47.98,22.52-47.98,57.44s17.64,57.44,47.98,57.44c31.99,0,44.39-21.21,47.66-44.06l53.21,2.28
+	c-3.91,51.26-37.54,91.06-100.53,91.06S841.56,419.1,841.56,355.78S886.93,249.06,946.99,249.06z" />
+      <path class="st0" d="M1169.86,298.02c-30.36,0-49.6,22.84-49.6,57.77s19.26,57.77,49.6,57.77s49.6-22.85,49.6-57.77
+	S1200.21,298.02,1169.86,298.02z M1169.86,462.51c-59.73,0-106.74-43.41-106.74-106.73s47-106.72,106.74-106.72
+	s106.74,43.41,106.74,106.72S1229.6,462.51,1169.86,462.51z" />
+    </svg>
   </div>
   <ul class="navbar">
     <li>
-      <a href="mailto:design@carlosfran.co" target="_blank">
-        <h1>Contact</h1>
+      <a href="mailto:design@carlosfran.co" target="_blank">Contact
       </a>
     </li>
+    <!--
     <li>
       <a href="https://www.instagram.com/co.ldfoot/" target="_blank">
         <h1>Instagram</h1>
@@ -534,7 +695,12 @@
         <h1>Resume</h1>
       </a>
     </li>
+    -->
   </ul>
+
+  <div class="toggle">
+    <p>space to toggle</p>
+  </div>
 
   <div class="scroll-container">
     <div class="content-grid">
@@ -544,7 +710,7 @@
           <img src="./assets/images/TES_Ads_Mockup_02.jpg">
         </a>
       </div>
-      <div class="item" data-subtitle="Perot Museum">
+      <div class="item" data-subtitle="Perot Museum of Nature and Science">
         <a href="https://labs.perotmuseum.org/exhibits/PowTex/" target="_blank">
           <img src="./assets/images/PowTex_Mockup.png">
         </a>
@@ -570,29 +736,45 @@
           <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/bw_hero.png?w=2160">
         </a>
       </div>
-      <div class="item" data-subtitle="Design in Motion">
-        <a href="https://vimeo.com/313332124" target="_blank">
-          <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/dpim_hero.png?w=2160">
-        </a>
-      </div>
       <div class="item" data-subtitle="Donald Glover (Pencil)">
         <img src="https://carlosfrancoweb.files.wordpress.com/2019/10/donald-glover-portrait-hero.jpg?w=2160">
       </div>
     </div>
-    <div class="scroll-outro" id="return-to-top" data-subtitle="back to top">
+    <div class="scroll-outro" id="return-to-top" data-subtitle="Home">
+      <a href="mailto:design@carlosfran.co" target="_blank"></a>
     </div>
   </div>
 
   <div id="scroll-indicator">
-    <span class="arrow">&#8595;</span>
+    <p class="scroll">scroll</p>
+  </div>
+
+  <!-- Mobile Bio Section -->
+  <div class="mobile-bio">
+    <p>is a multidisciplinary artist and designer based in texas ✦ he studied arts and technology at <em>the university
+        of texas at dallas</em> and has more than five years of exhibit design experience at <em>the perot museum of
+        nature
+        and science</em> ✦ he has been practicing freelance graphic design since what is now known as frutiger aero ✦
+      tap to toggle ✦
+      <a href="mailto:design@carlosfran.co" target="_blank">Contact
+      </a>
+    </p>
+  </div>
+
+  <!-- Mobile List View -->
+  <div class="mobile-list">
+    <h3>Work</h3>
+    <ul id="mobile-list-items">
+      <!-- Populated by JavaScript -->
+    </ul>
   </div>
 
   <script>
     let scrollY = 0;
     let velocity = 0;
-    const friction = 0.12; // Easing factor (lower = slower stop)
-    const sensitivity = 0.7; // Adjusts how fast scroll responds to wheel delta
-    const relativity = 0.0099; // Higher = heavier drag at high speed
+    const friction = 0.12;
+    const sensitivity = 0.7;
+    const relativity = 0.0099;
     let mouseX = 0;
     let mouseY = 0;
 
@@ -600,6 +782,7 @@
     const scrollIndicator = document.getElementById('scroll-indicator');
     const navbar = document.querySelector('.navbar');
     const hero = document.querySelector('.hero');
+    const toggle = document.querySelector('.toggle');
     const outro = document.querySelector('.scroll-outro');
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -608,6 +791,101 @@
         cursorText.style.opacity = 0;
         cursorCircle.style.transform = 'scale(0.25)';
       });
+
+      // Populate mobile list with content-grid items
+      const mobileListItems = document.getElementById('mobile-list-items');
+      const contentItems = document.querySelectorAll('.content-grid .item');
+
+      if (mobileListItems && contentItems.length > 0) {
+        contentItems.forEach(item => {
+          const subtitle = item.getAttribute('data-subtitle');
+          if (subtitle) {
+            const listItem = document.createElement('li');
+            listItem.textContent = subtitle;
+
+            // Add click handler to navigate to the original link if it exists
+            const link = item.querySelector('a');
+            if (link) {
+              listItem.style.cursor = 'pointer';
+              listItem.addEventListener('click', () => {
+                window.open(link.href, '_blank');
+              });
+            }
+
+            // Add hover functionality to show image preview
+            const img = item.querySelector('img');
+            if (img) {
+              listItem.addEventListener('mouseenter', () => {
+                showImagePreview(img.src, subtitle);
+              });
+
+              listItem.addEventListener('mouseleave', () => {
+                hideImagePreview();
+              });
+            }
+
+            mobileListItems.appendChild(listItem);
+          }
+        });
+      }
+
+      // Remove all timeouts and delays for image preview
+      function showImagePreview(imgSrc, title) {
+        hideImagePreview();
+
+        // Create preview container
+        const previewContainer = document.createElement('div');
+        previewContainer.id = 'mobile-image-preview';
+        previewContainer.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 9999;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        `;
+
+        // Create image element
+        const previewImg = document.createElement('img');
+        previewImg.src = imgSrc;
+        previewImg.style.cssText = `
+          width: 70vw;
+          height: 50vw;
+          object-fit: cover;
+        `;
+
+        // Append elements
+        previewContainer.appendChild(previewImg);
+        document.body.appendChild(previewContainer);
+
+        // Fade in
+        setTimeout(() => {
+          previewContainer.style.opacity = '1';
+        }, 10);
+      }
+
+      function hideImagePreview() {
+        const existingPreview = document.getElementById('mobile-image-preview');
+        if (existingPreview) {
+          existingPreview.style.opacity = '0';
+          setTimeout(() => {
+            existingPreview.remove();
+          }, 300);
+        }
+      }
+
+      // Attach event listeners to the mobile-list container to track hover state
+      const mobileList = document.querySelector('.mobile-list');
+      if (mobileList) {
+        mobileList.addEventListener('mouseleave', () => {
+          hideImagePreview();
+        });
+
+        mobileList.addEventListener('mouseenter', () => {
+          // No-op, but kept for symmetry
+        });
+      }
 
       // Simple Safari detection
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -621,11 +899,10 @@
           // Delay full removal so transition completes
           setTimeout(() => {
             overlay.remove();
-            updateCursorState(); // Reset classes/text
+            updateCursorState();
           }, 500);
         });
       } else {
-        // Remove overlay for non-Safari browsers
         const overlay = document.getElementById('safari-overlay');
         if (overlay) overlay.remove();
       }
@@ -637,10 +914,8 @@
 
       function fakeScroll() {
         const relativeVelocity = velocity * (1 / (1 + Math.abs(velocity) * relativity));
-        // Manually updates scroll-container positioning using velocity settings
         scrollY += relativeVelocity;
 
-        // Scroll cannot exceed vertical bounds of the container
         const maxScroll = scrollContainer.scrollHeight - window.innerHeight;
         scrollY = Math.max(0, Math.min(scrollY, maxScroll));
 
@@ -653,15 +928,17 @@
         if (scrollY > 10 && scrollY < maxScroll - 10) {
           navbar?.classList.add('scrolled');
           hero?.classList.add('scrolled');
+          toggle?.classList.add('scrolled');
           scrollIndicator?.classList.add('hidden');
         } else if (scrollY <= 10) {
           navbar?.classList.remove('scrolled');
           hero?.classList.remove('scrolled');
+          toggle?.classList.remove('scrolled');
           scrollIndicator?.classList.remove('hidden');
         } else {
-          // bottom of page
-          navbar?.classList.remove('scrolled');  // show navbar if desired
-          hero?.classList.add('scrolled');       // keep hero hidden
+          navbar?.classList.add('scrolled');
+          hero?.classList.add('scrolled');
+          toggle?.classList.add('scrolled');
           scrollIndicator?.classList.add('hidden');
         }
 
@@ -691,7 +968,7 @@
       circle.setAttribute("cx", "24");
       circle.setAttribute("cy", "24");
       circle.setAttribute("r", "6");
-      circle.setAttribute("fill", "#004d25");
+      circle.setAttribute("fill", "var(--text)");
       circle.classList.add("cursor-circle");
 
       svg.appendChild(circle);
@@ -748,11 +1025,11 @@
           cursorText.style.opacity = 1;
 
           if (hoveredOverlay) {
-            cursorWrapper.classList.add('cursor-hover-overlay'); // ✅ Overlay-specific class
+            cursorWrapper.classList.add('cursor-hover-overlay');
           } else if (hoveredOutro) {
             cursorWrapper.classList.add('cursor-hover-outro');
           } else {
-            cursorWrapper.classList.add('cursor-hover-content'); // ✅ Default item class
+            cursorWrapper.classList.add('cursor-hover-content');
           }
 
           return;
@@ -781,11 +1058,11 @@
         document.documentElement.style.setProperty('--y', (e.clientY + window.scrollY) + 'px');
       };
 
+      // Replace with direct link to mailto ref <a href="mailto:design@carlosfran.co" target="_blank">
       document.getElementById('return-to-top')?.addEventListener('click', (e) => {
         e.preventDefault();
         scrollY = 0;
         velocity = 0;
-        // Force cursor to visually reappear at the same position
         cursorWrapper.style.top = `${mouseY}px`;
         cursorWrapper.style.left = `${mouseX}px`;
         updateCursorState();
@@ -806,12 +1083,24 @@
         scrollContainer.style.position = 'static';
         scrollContainer.style.overflowY = 'auto';
 
-        // Disable all scroll velocity listeners
         window.removeEventListener('wheel', () => { });
-        // Remove animation frame if any
         if (typeof cancelAnimationFrame === 'function') cancelAnimationFrame(fakeScroll);
       });
     }
+
+    function toggleDarkMode(Event) {
+      document.body.classList.toggle('dark-mode');
+      console.log("toggled");
+    }
+
+    // Toggle dark/light mode on any click on the screen, except anchor links
+    document.addEventListener('click', toggleDarkMode);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === " ") {
+        toggleDarkMode(event);
+      }
+    });
 
   </script>
 
