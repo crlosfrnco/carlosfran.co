@@ -808,7 +808,10 @@
             if (link) {
               listItem.style.cursor = 'pointer';
               listItem.addEventListener('click', () => {
-                window.open(link.href, '_blank');
+                // Only navigate to href on desktop, not mobile
+                if (!isMobile) {
+                  window.open(link.href, '_blank');
+                }
               });
             }
 
