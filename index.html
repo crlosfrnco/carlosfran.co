@@ -507,14 +507,22 @@
         position: fixed;
         top: 20px;
         right: 20px;
-        width: 45vw;
+        max-width: 45vw;
         z-index: 2;
+        max-height: 40vh;
+        overflow-y: none;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
         font-family: 'NeueHaasDisplay', sans-serif;
         font-weight: 400;
         text-transform: uppercase;
-        font-size: 1em;
+        font-size: 80%;
         line-height: 1.4;
         text-align: justify;
+        padding-right: 0; /* Prevent padding for scrollbar */
+      }
+      .mobile-bio::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
       }
 
       .mobile-bio p {
@@ -563,8 +571,9 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 45vw;
+        max-width: 45vw;
         z-index: 2;
+        font-size: 80%;
         text-transform: uppercase;
         padding-bottom: 0 !important;
         margin-bottom: 0 !important;
@@ -573,7 +582,6 @@
       .mobile-list h3 {
         font-family: 'FoundersGrotesk', sans-serif;
         font-weight: 400;
-        font-size: 1em;
         line-height: 1;
         color: var(--accent);
         text-transform: uppercase;
@@ -584,7 +592,6 @@
       .mobile-list ul {
         font-family: 'NeueHaasGrotesk', sans-serif;
         font-weight: 400;
-        font-size: 1em;
         list-style: none;
         padding: 0;
         margin: 0;
@@ -592,7 +599,6 @@
 
       .mobile-list li {
         margin-bottom: 12px;
-        font-size: 1rem;
         line-height: 1.4;
         display: block;
         width: 100%;
