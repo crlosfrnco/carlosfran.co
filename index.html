@@ -500,14 +500,16 @@
         right: 20px;
         max-width: 45vw;
         z-index: 2;
-        max-height: 40vh;
+        max-height: 35vh;
         font-family: 'NeueHaasDisplay', sans-serif;
         font-weight: 400;
         text-transform: uppercase;
         font-size: 9pt;
         line-height: 1.4;
         text-align: justify;
-        padding-right: 0; /* Prevent padding for scrollbar */
+        padding-right: 0;
+        /* Prevent padding for scrollbar */
+        overflow: hidden;
       }
 
       .mobile-bio p {
@@ -560,6 +562,19 @@
         text-transform: uppercase;
         padding-bottom: 0 !important;
         margin-bottom: 0 !important;
+        max-height: 40vh;
+        overflow-y: auto;
+
+        /* Hide scrollbar */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* Internet Explorer 10+ */
+      }
+
+      .mobile-list::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Opera */
       }
 
       .mobile-list h3 {
@@ -613,6 +628,112 @@
         content: '\2604\FE0E';
       }
       */
+    }
+
+    /* Extra small screens: stack hero, bio, and list vertically, size down text */
+    @media (max-width: 480px) {
+
+      html,
+      body {
+        height: auto;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .hero,
+      .mobile-bio,
+      .mobile-list {
+        position: static !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        z-index: auto !important;
+        box-sizing: border-box;
+        padding: 0px 20px;
+        margin: 0;
+      }
+
+      .hero {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Remove any vertical offset to ensure hero starts at the top */
+      }
+
+      .mobile-bio {
+        margin-top: 20px;
+        max-height: none;
+        line-height: 1.3;
+        text-align: justify;
+        width: 100vw !important;
+      }
+
+      .mobile-bio em {
+        font-size: 1em;
+      }
+
+      .mobile-list {
+        max-height: none;
+        text-align: justify;
+        width: 100vw !important;
+      }
+
+      .mobile-bio p,
+      .mobile-list h3,
+      .mobile-list li {
+        font-size: clamp(14pt, 4vw, 18pt);
+      }
+
+      .mobile-list h3 {
+        display: auto;
+      }
+
+      .mobile-list li {
+        margin-bottom: 10px;
+      }
+
+      /* Continuous text display for mobile list */
+      .mobile-list.continuous-text {
+        display: block;
+        position: fixed !important;
+        bottom: 20px !important;
+        top: auto !important;
+        z-index: 9999 !important;
+      }
+
+      .mobile-list.continuous-text ul {
+        display: block;
+        white-space: normal;
+        line-height: 1.4;
+      }
+
+      .mobile-list.continuous-text li {
+        display: inline;
+        margin-bottom: 0;
+        font-size: clamp(12pt, 3.5vw, 16pt);
+      }
+
+      .mobile-list.continuous-text li:not(:last-child)::after {
+        content: " ✦ ";
+        display: inline;
+      }
+      .mobile-list.continuous-text li:not(:last-child):hover::after {
+        color: var(--text);
+      }
+
     }
   </style>
 
@@ -822,28 +943,54 @@
       }
 
       // Remove all timeouts and delays for image preview
+      let previewTimeout;
+      
       function showImagePreview(imgSrc, title) {
+        // Clear any existing timeout and hide current preview
+        if (previewTimeout) {
+          clearTimeout(previewTimeout);
+        }
         hideImagePreview();
 
         // Create preview container
         const previewContainer = document.createElement('div');
         previewContainer.id = 'mobile-image-preview';
-        previewContainer.style.cssText = `
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 9999;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        `;
+        
+        // Only apply random positioning for devices 480px or smaller
+        if (window.innerWidth <= 480) {
+          // Calculate random position within 20px edge margins
+          const maxX = window.innerWidth - 70 - 40; // 70vw width - 40px total margins
+          const maxY = window.innerHeight - 50 - 40; // 50vw height - 40px total margins
+          const randomX = Math.max(20, Math.min(maxX, Math.random() * maxX));
+          const randomY = Math.max(20, Math.min(maxY, Math.random() * maxY));
+          
+          previewContainer.style.cssText = `
+            position: fixed;
+            top: ${randomY}px;
+            left: ${randomX}px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          `;
+        } else {
+          // Center positioning for larger devices
+          previewContainer.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          `;
+        }
 
         // Create image element
         const previewImg = document.createElement('img');
         previewImg.src = imgSrc;
         previewImg.style.cssText = `
-          width: 40vw;
-          height: 30vw;
+          width: 70vw;
+          height: 50vw;
           object-fit: cover;
         `;
 
@@ -855,6 +1002,11 @@
         setTimeout(() => {
           previewContainer.style.opacity = '1';
         }, 10);
+
+        // Auto-hide after 2 seconds
+        previewTimeout = setTimeout(() => {
+          hideImagePreview();
+        }, 2000);
       }
 
       function hideImagePreview() {
@@ -862,7 +1014,9 @@
         if (existingPreview) {
           existingPreview.style.opacity = '0';
           setTimeout(() => {
-            existingPreview.remove();
+            if (existingPreview.parentNode) {
+              existingPreview.remove();
+            }
           }, 300);
         }
       }
@@ -1080,6 +1234,22 @@
       });
     }
 
+    // Function to handle continuous text display for mobile list
+    function handleContinuousTextDisplay() {
+      const mobileList = document.querySelector('.mobile-list');
+      if (mobileList && window.innerWidth <= 480) {
+        mobileList.classList.add('continuous-text');
+      } else if (mobileList) {
+        mobileList.classList.remove('continuous-text');
+      }
+    }
+
+    // Apply on page load
+    window.addEventListener('DOMContentLoaded', handleContinuousTextDisplay);
+
+    // Apply on window resize
+    window.addEventListener('resize', handleContinuousTextDisplay);
+
     function toggleDarkMode(Event) {
       document.body.classList.toggle('dark-mode');
       console.log("toggled");
@@ -1089,7 +1259,7 @@
     document.addEventListener('click', (event) => {
       // Check if the clicked element is an anchor or is inside an anchor
       const isAnchorClick = event.target.closest('a');
-      
+
       if (!isAnchorClick) {
         toggleDarkMode(event);
       }
